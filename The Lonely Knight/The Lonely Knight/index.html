@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.5.0/p5.min.js" 
+     integrity="sha512-WJXVjqeINVpi5XXJ2jn0BSCfp0y80IKrYh731gLRnkAS9TKc5KNt/OfLtu+fCueqdWniouJ1ubM+VI/hbo7POQ==" 
+     crossorigin="anonymous" 
+     referrerpolicy="no-referrer">
+     </script>
+     <!-- Includes the p5.collide2D addon library -->
+     <script defer src="https://unpkg.com/p5.collide2d"></script>
+     <!-- refrence external javasript -->
+     <script src="script.js"></script>
+     <link href="style.css" rel="stylesheet" type="text/css" />  
+     <link href="https://fonts.cdnfonts.com/css/common-pixel" rel="stylesheet">
+     <style>
+            @import url('https://fonts.cdnfonts.com/css/common-pixel');
+    </style>
+             
+     <!-- Sound Library-->
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.5.0/addons/p5.sound.js" integrity="sha512-TU9AWtV5uUZPX8dbBAH8NQF1tSdigPRRT82vllAQ1Ke28puiqLA6ZVKxtUGlgrH6yWFnkKy+sE6luNEGH9ar0A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>   
+
+</head>
+<body id="body1">
+
+    <div id = "image_text"></div>
+    <h1 id = "display_text"></h1>
+    <div id="image_pic"></div>
+    <div id="box_text"><span id = "common_text">This is a common text. <br>Just a waste of space</span></div>
+    <div id="stat_menu">
+        <div id="line1"></div>
+        <div id="line2"></div>
+        <div id="line3"></div>
+        <hr id="line4">
+        <span id="healthstat">Health</span>
+        <span id="healthn"></span>
+        <span id="gold">Gold</span>
+        <span id="goldn"></span>
+        <span id="xp">Experience</span>
+        <span id="xpn"></span>
+    </div>
+    
+
+<script>
+    //----TO DO LIST-----
+    //INDEX!!
+    //*Add attack part of girl function
+    //ALL!!!
+    //*Stores-to increase health, max stamina, max health
+    //*Sounds when character walks
+    //*Sounds when character attacks
+    //*Add dialogue and quests in levels
+    //*Spawn to levels and be able to go back
+    //*Different levels have different enemies
+    //*Create Maps
+  
+
+
+    
+    let w = window.innerWidth;
+    let h = window.innerHeight;
+    let moveX = 55;
+    let moveY = 631;
+    let x1;
+    let y1;
+    gold = 0;
+    xp = 0;
+    let size1;
+    let random_attack;
+    let stuck = false;
+    let gototown = false
+    ///For multiple text boxes
+    let countcheck = -1;
+    let countcheck1 = -1;
+    let isPressed = false;
+    ///Hit variables
+    let cryinggirl = false;
+    let hitcryonce;
+    let hitgirl = false;
+    let hitgirlonce = false;
+    let teleporttotown = false;
+    let once = 1
+    let once1 = 1
+    let once3 = 1
+    let once4 = 1
+    let once5 = 1
+    let once9 = 1
+    musiconce = 1
+    let oncelv1 = 1
+    let dissapeargirl = false;
+    let nevergirl = false
+    let againt;
+    let againtt;
+    let battle1;
+    let battle2;
+    let girl;
+    let girlsize = 60;
+    let onceh = "true"
+    let tree1;
+    let tree2;
+    let tree3;
+    let tree4;
+    let tree5;
+    let awrt = false
+    moveright = true
+    firsttime ="true"
+    sessionStorage.setItem("firsttime",firsttime)
+    telebat = sessionStorage.getItem("telebat")
+    awrt = sessionStorage.getItem("awrt")
+    if(telebat=="true"){
+        telebat = false
+        
+        if(awrt =="true"){
+            gold= sessionStorage.getItem("gold")
+            xp = sessionStorage.getItem("xp")
+            xp = parseInt(xp)
+            gold = parseInt(gold)
+            hitgirlonce = sessionStorage.getItem("hitgirlonce")
+            hitgirlonce = true
+            gototown = sessionStorage.getItem("gototown")
+            gototown = true
+            onceh = sessionStorage.getItem("onceh")
+            if(onceh=="true"){
+                onceh = true
+            }
+            dissapeargirl = true
+            girlsize = 0
+            
+        }
+        moveX = sessionStorage.getItem("moveX")
+        moveX = parseInt(moveX)
+        moveY = sessionStorage.getItem("moveY")
+        moveY = parseInt(moveY)
+        once4 = sessionStorage.getItem("once4")
+        once4 = parseInt(once4)
+        health = sessionStorage.getItem("health")
+        
+        goldadd = sessionStorage.getItem("goldadd")
+        xpadd = sessionStorage.getItem("xpadd")
+        xpadd = parseInt(xpadd)
+        goldadd = parseInt(goldadd)
+        gold+=goldadd
+        xp+=xpadd
+        console.log(gold)
+    }
+function preload() {
+    soundFormats('mp3',"ogg")
+    levelm1 = loadSound('levelm1.mp3')
+}
+    
+function setup() {
+    
+    createCanvas(w,h);
+    levelm1.setVolume(1.0);
+    levelm1.play()
+    goback = sessionStorage.getItem("gobackkey")
+    right = loadImage('right.png')
+    left = loadImage("left.png")
+    up = loadImage("up.png")
+    down = loadImage("down.png")
+    girl = loadImage("littlegirl.png")
+    potion = loadImage("potion.png")
+    ///Loaded Trees
+    tree1 = loadImage("tree1.png")
+    tree2 = loadImage("tree2.png")
+    tree3 = loadImage("tree3.png")
+    tree4 = loadImage("tree4.png")
+    tree5 = loadImage("tree5.png")
+
+    
+}
+
+
+function draw() {
+    //Music
+    if((musiconce == 1)&&(music_start===true)){
+            userStartAudio()
+            musiconce=2
+        }
+        if (levelm1.isPlaying()){
+
+        }
+        else{
+            levelm1.loop()
+            }
+    
+           
+    clear()
+    ///Below are a list of trees(Only decoration)
+    image(tree1,500,600,70,130)
+    image(tree2,300,100,70,130)
+    image(tree3,800,200,70,130)
+    image(tree4,1100,360,70,130)
+    image(tree3,1500,700,80,130)
+    image(tree2,1700,600,80,130)
+    image(tree4,300,700,80,130)
+    image(tree1,1600,400,80,130)
+
+    ///TO check if leveling up is neccesary
+    if((oncelv1==1)&&(xp>=100)){
+        xp-=100
+        levelup = true
+        
+    }
+
+    
+    if ((gold===undefined)||(gold===NaN)){
+        gold = 0
+    }
+    if ((xp===undefined)||(xp===NaN)){
+        xp  =0
+    }
+    
+    
+    
+    
+    health = parseInt(health)
+    //Stats info & placement
+    if((health >= 100)||(health>=10)){
+        document.getElementById("healthn").style.right = "80%"
+    }
+    
+    document.getElementById("goldn").innerHTML = gold
+    document.getElementById("healthn").innerHTML = health
+    document.getElementById("xpn").innerHTML = xp
+    console.log(health)
+    //makes sure that the health starts at 100
+    maxhealth = 100
+    if ((moveX == 55)&&(moveY == 631)){
+        health = 100
+        hitcryonce = false
+    }
+    if (goback == "true"){
+        moveX = 1700
+        moveY = 256
+        goback = "false"
+        gototown = true
+        dissapeargirl = true
+        
+    }
+    //Begining text
+    noStroke()
+    fill(color(0,0,0,0.2))
+    rect(500,0,100,1100)
+    cryinggirl = collideRectRect(moveX,moveY,200,200,500,0,100,1100)
+    if ((cryinggirl === true)&&(hitcryonce ===false)){
+            document.getElementById("display_text").innerHTML = ""
+            document.getElementById("image_text").style.visibility = "visible"
+            document.getElementById("common_text").style.visibility = "visible"
+            document.getElementById("common_text").innerHTML = '"WHAA!!!! WHAA!!!!"<br>Where is that loud crying coming from<br>I must help them now!!<br>Press any key to continue'
+            document.getElementById("image_pic").style.visibility = "visible"
+            document.getElementById("image_pic").style.backgroundImage = "url('head.png')"
+            stuck = true
+
+            setTimeout(function(){
+
+                onkeypress = function(){
+                    document.getElementById("image_text").style.visibility = "hidden"
+                    document.getElementById("common_text").style.visibility = "hidden"
+                    document.getElementById("image_pic").style.visibility = "hidden"
+
+                    stuck = false
+                    hitcryonce = true
+                    
+                }
+
+            }, 3000); 
+
+    }
+
+
+    //Girl character
+    noStroke()
+    fill(color(0,0,0,0.2))
+    rect(1830,96,100,400)
+    fill(color("blue"))
+    if (dissapeargirl === true){
+        fill(color(0,0,0,0.2))
+        nevergirl = true
+        girlsize = 0
+
+    }
+    fill(color(0,0,0,0.2))
+    rect(1440, 381,100,100)
+    
+    //Main character
+    if (moveup === true){
+        image(up,moveX,moveY,150,150)
+        movedown = false
+        moveleft = false
+
+    }
+    else if(movedown === true){
+        image(down,moveX,moveY,150,100)
+        moveup = false
+        moveleft = false
+    }
+    else if(moveleft === true){
+        image(left,moveX,moveY,110,130)
+        moveup = false
+        movedown = false
+    }
+    else if (moveright === true){
+        image(right,moveX,moveY,150,170)
+    }
+    fill(color(0,0,0,0.2))
+    rect(moveX,moveY,200,200)
+    
+    if (keyIsDown(65)) {
+        if ((moveX > 0)&&(stuck === false)){
+            moveX = moveX -5;
+            moveleft = true
+            moveup = false
+            movedown = false
+            
+            music_start = true
+
+        }
+        
+    }
+    if (keyIsDown(68)){
+        if ((moveX < 1820)&&(stuck === false)){
+            moveX = moveX +5;
+            moveright = true
+            moveleft = false
+            moveup = false
+            movedown = false
+            
+            music_start = true
+        }
+        
+
+    }
+    if (keyIsDown(83)){
+        if ((moveY < 675)&&(stuck === false)){
+            moveY = moveY +5;
+            movedown = true
+            moveup = false
+            moveleft = false
+
+            music_start = true
+            
+
+        }
+
+    }
+    if (keyIsDown(87)){
+        if ((moveY > 0)&&(stuck === false)){
+        
+            moveY = moveY -5;
+            moveup = true
+            movedown = false
+            moveleft = false
+
+            music_start = true
+         
+        }
+
+    }
+    teleporttotown = collideRectRect(moveX,moveY,100,100,1820,96,100,400)
+    if ((teleporttotown === true)&&(gototown === true)) {
+        if (once == 1){
+            sessionStorage.setItem("onceh",onceh)
+            sessionStorage.setItem("health",health)
+            sessionStorage.setItem("xp",xp)
+            sessionStorage.setItem("gold",gold)
+            window.location.href = "l1.html"
+            once +=1
+            
+
+        }
+        
+        
+    }
+    image(girl,1440, 281,girlsize,girlsize)
+    hitgirl = collideRectRect(moveX,moveY,200,200,1440, 281,100,100)
+    if ((hitgirl === true)&&(hitgirlonce === false)&&(nevergirl=== false)){
+        document.getElementById("display_text").innerHTML = "Press 'c' to talk to girl(?)"
+        againtt = true
+        if ((keyCode === 67)||(againt === true)){
+            document.getElementById("display_text").innerHTML = ""
+            againt = true
+            document.getElementById("image_text").style.visibility = "visible"
+            document.getElementById("common_text").style.visibility = "visible"
+            document.getElementById("image_pic").style.visibility = "visible"
+            document.getElementById("image_pic").style.backgroundImage = "url('girlhead.png')"
+            document.getElementById("image_pic").style.transform = "scaleX(-1)"
+            document.getElementById("common_text").innerHTML = "A group of Goblins <br>surround a crying <br>little girl<br> She is scared and <br>screams in agony"
+            stuck = true
+            onkeypress = function(){
+                countcheck += 1
+            
+                
+            }
+            if (countcheck==0){
+                    document.getElementById("common_text").innerHTML = "This wont work"
+                    countcheck = 1
+                
+                }
+            else if (countcheck == 1){
+                    document.getElementById("common_text").innerHTML = '"Help!!"<br>"Anyone please"'
+                    document.getElementById("image_pic").style.transform = "scaleX(-1)"
+                    document.getElementById("image_pic").style.backgroundImage = "url('girlhead.png')"
+                    
+                }
+            else if (countcheck == 2){
+                    document.getElementById("image_pic").style.transform = ""
+                    document.getElementById("common_text").innerHTML = '"Dont worry Miss"<br>"I will Save you from those green savages"'
+                    document.getElementById("image_pic").style.visibility = "visible"
+                    document.getElementById("image_pic").style.backgroundImage = "url('head.png')"
+                }
+            else if (countcheck == 3){
+                    document.getElementById("image_text").style.visibility = "hidden"
+                    document.getElementById("common_text").style.visibility = "hidden"
+                    document.getElementById("image_pic").style.visibility = "hidden"
+                    stuck = false
+                    hitgirlonce = true
+                    countcheck = -1
+                    gototown = true
+                ///Intiate the group battle
+                if(once9 == 1){ 
+                    once9 =2
+                    place = "index.html"
+                    telebat = true
+                    awrt = true
+                    goblin = true
+                    gototown = true
+                    sessionStorage.setItem("onceh",onceh)
+                    sessionStorage.setItem("gototown",gototown)
+                    sessionStorage.setItem("hitgirlonce",hitgirlonce)
+                    sessionStorage.setItem("awrt",awrt)
+                    sessionStorage.setItem("gold",gold)
+                    sessionStorage.setItem("xp",xp)
+                    sessionStorage.setItem("levelup",levelup)
+                    sessionStorage.setItem("once4",once4)
+                    sessionStorage.setItem("moveX",moveX)
+                    sessionStorage.setItem("moveY",moveY)
+                    sessionStorage.setItem("telebat",telebat)
+                    sessionStorage.setItem("place",place)
+                    sessionStorage.setItem("health",health)
+                    sessionStorage.setItem("goblin",goblin)
+                    ranattackdual()
+            }
+            
+
+
+                
+                    
+                    
+                }
+        }
+    }
+
+    else {
+        document.getElementById("display_text").innerHTML = ""
+    }
+
+    //Potion
+    fill(color(0,0,0,0.2))
+    rect(1200,300,50,50)
+    if (onceh=="true"){
+        image(potion,1200,500,100,100)
+    }
+    else{
+
+    }
+    heal = collideRectRect(moveX,moveY,100,100,1200,500,100,100)
+    if ((heal===true)&&(onceh=="true")){
+        health += 70
+        onceh = false
+        if (health>maxhealth){
+            health =maxhealth
+        }
+    }
+
+    fill(color(0,0,0,0.2))
+    rect(w/2,0,100,1100)
+    battle1 = collideRectRect(moveX,moveY,200,200,w/2,0,100,1100)
+    //intiates the first battle
+    if ((battle1 === true)&&(once4 ==1)){
+
+        document.getElementById("display_text").innerHTML = ""
+        document.getElementById("image_text").style.visibility = "visible"
+        document.getElementById("common_text").style.visibility = "visible"
+        document.getElementById("common_text").innerHTML = "I must hurry now <br> What! A goblin is here<br>There shouldn't be any goblins in this area<br>Press any key to battle  "
+        document.getElementById("image_pic").style.visibility = "visible"
+        document.getElementById("image_pic").style.backgroundImage = "url('head.png')"
+        stuck = true
+
+        setTimeout(function(){
+
+        onkeypress = function(){
+            document.getElementById("image_text").style.visibility = "hidden"
+            document.getElementById("common_text").style.visibility = "hidden"
+            document.getElementById("image_pic").style.visibility = "hidden"
+            stuck = false
+
+            once4 = 2
+            if (once1 == 1){
+                once1 = 2
+                place = "index.html"
+                telebat = true
+                goblin = true
+                sessionStorage.setItem("levelup",levelup)
+                sessionStorage.setItem("once4",once4)
+                sessionStorage.setItem("moveX",moveX)
+                sessionStorage.setItem("moveY",moveY)
+                sessionStorage.setItem("telebat",telebat)
+                sessionStorage.setItem("place",place)
+                sessionStorage.setItem("health",health)
+                sessionStorage.setItem("goblin",goblin)
+                ranattack()
+            }
+            
+        }
+
+        }, 3000); 
+    }
+    }
+    
+    function mouseMoved() {
+        music_start = true
+        }
+
+    
+    
+    
+
+
+
+
+</script>
+  
+</body>
+</html>

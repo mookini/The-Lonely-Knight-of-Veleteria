@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.5.0/p5.min.js" 
+    integrity="sha512-WJXVjqeINVpi5XXJ2jn0BSCfp0y80IKrYh731gLRnkAS9TKc5KNt/OfLtu+fCueqdWniouJ1ubM+VI/hbo7POQ==" 
+    crossorigin="anonymous" 
+    referrerpolicy="no-referrer">
+    </script>
+    <!-- Includes the p5.collide2D addon library -->
+    <script defer src="https://unpkg.com/p5.collide2d"></script>
+    <!-- refrence external javasript -->
+    <script src="script.js"></script>
+    <link href="style.css" rel="stylesheet" type="text/css" />  
+    <link href="https://fonts.cdnfonts.com/css/common-pixel" rel="stylesheet">
+    <style>
+           @import url('https://fonts.cdnfonts.com/css/common-pixel');
+   </style>
+
+   
+     <!-- Sound Library-->
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.5.0/addons/p5.sound.js" integrity="sha512-TU9AWtV5uUZPX8dbBAH8NQF1tSdigPRRT82vllAQ1Ke28puiqLA6ZVKxtUGlgrH6yWFnkKy+sE6luNEGH9ar0A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body id="body3">
+    <div id="black1"></div>
+    <div id="black2"></div>
+    <div id="black3"></div>
+    <div id="h&s">
+        <span id = "name">Knight</span>
+        <span id="health"></span>
+        <span id="stamina"></span>
+    </div>
+    <div id="movesbox">
+        <span id = "slash">1:Slash</span>
+        <span id = "stab">2:Stab</span>
+        <span id = "block">3:Block</span>
+        <span id = "dodge">4:Dodge</span>
+        <span id = "rest">5:Rest</span>
+    </div>
+    <div id="display_enemy_text">
+        <span id = "enemyname"></span>
+        <span id = "enemyhealth"></span>
+    </div>
+    <span id="display_text2"></span>
+<!--Animations Only-->
+    <div id="playeranimation"></div>
+    <div id="playeranimation1"></div>
+
+    <div id="enemyanimation"></div>
+    <div id="enemyanimation1"></div>
+
+<!--WIN OR LOSE-->
+    <div id="shadow"></div>
+    <div id="win_window">
+        <span id="WoL"></span>
+        <span id="goldr"></span>
+        <span id="xpr"></span>
+        <button onclick="contin()"id="continue">continue</button>
+        <button onclick ="restart()" id="restart">restart</button>
+       
+    </div>
+
+
+
+    <script>
+        //Readjusting the place of player animation
+        document.getElementById("playeranimation").style.bottom = "50%"
+        document.getElementById("playeranimation1").style.bottom = "50%"
+
+        let w = window.innerWidth;
+        let h = window.innerHeight;
+        let once7 = 1
+        let once2 = 1
+        let once8 = 1
+        let once9 = 1
+        let counta1 = 1
+        let counta2 = 1
+        let counte1 = 1
+        let slash = false;
+        let stab = false;
+        let block = false;
+        let dodge = false;
+        let rest = false;
+        let done;
+        let warning = false;
+        let warning2 = false
+        let outofbreath = false;
+        let maxhealth;
+        let maxstamina;
+        let guess;
+        let god = true;
+        let wait = true;
+        let movex = 1300
+        let movexg = 300
+        let movexm = 300
+        let rani;
+        musiconce = 1;
+        stamina = 100
+        health = sessionStorage.getItem("health")
+        health = parseInt(health)
+        levelup=sessionStorage.getItem("levelup")
+        let moveX = sessionStorage.getItem("moveX")
+        let moveY = sessionStorage.getItem("moveY")
+        telebat = sessionStorage.getItem("telebat")
+        goblin = sessionStorage.getItem("goblin")
+        
+   
+      
+        //Choosing enemy
+        //guess = Math.floor(Math.random()*2)+1
+        ///
+        if ((goblin == "true")||(guess == 1)){
+            enemyhealth = 60
+            goblin = true
+            mushroom = false
+            document.getElementById("enemyname").innerHTML = "Goblin"
+            document.getElementById("enemyname").style.right = "84%"
+        }
+        else if ((mushroom == "true")||(guess == 2)){
+            enemyhealth = 110
+            mushroom = true
+            goblin = false
+            document.getElementById("enemyname").innerHTML = "Mushroom"
+        }
+
+
+        function preload(){
+            soundFormats('mp3',"ogg")
+            battlem1 = loadSound('battlem1.mp3')
+        }
+
+
+
+
+        function setup() {
+            createCanvas(w,h); 
+            battlem1.setVolume(1.0);
+            battlem1.play()
+            
+            left = loadImage("left.png")
+            mushroomi = loadImage("Mushroom_still.png")
+            goblini = loadImage("Goblin_still.png")
+        }
+        function draw(){
+            clear()
+            if((musiconce == 1)&&(music_start===true)){
+                    userStartAudio()
+                    musiconce=2
+                }
+                if (battlem1.isPlaying()){
+
+                }
+                else{
+                    battlem1.loop()
+                    }
+            
+            movex = movex
+            //Gives instructions to player. Only once
+            if (once8 == 1){
+                document.getElementById("display_text2").innerHTML = "Press 1,2,3,4,5 for each corresponding move the player can make"
+                once8 = 2
+                once9 = 1
+            }
+            if((once9 = 1)&&(warning === true)){
+                document.getElementById("display_text2").innerHTML = "Press 'enter' to comfirm players move"
+                once9 = 2
+
+            }
+            if(warning2===true){
+                document.getElementById("display_text2").innerHTML =""
+            }
+            console.log(health)
+            //maincharacter
+            image(left,movex,200,253,300)
+            
+            //MAX STATS WILL GO UP WHEN BETTER EQUIPMENT IS BOUGHT
+            maxstamina = 100
+            maxhealth = 100
+            //Setting maxhealth, will hcnage when I get better equipment
+            if (maxhealth<health){
+                health = maxhealth
+            }
+            if (maxstamina<stamina){
+                stamina = maxstamina
+            }
+            //Health and Stamina
+            document.getElementById("stamina").innerHTML = "Stamina: "+ stamina
+            document.getElementById("health").innerHTML = "Health: " + health
+            //Stamina checker
+            if (stamina<=0){
+                stamina = 0
+            }
+            //Enemy variant
+            document.getElementById("enemyhealth").innerHTML = "Enemy Health: "+enemyhealth
+            //Enemy choosing power of attack
+            if (mushroom === true){
+                enemyattack = Math.floor(Math.random()*6)+4
+                image(mushroomi,movexm,-100,653,800)
+            }
+            else if (goblin === true){
+                enemyattack = Math.floor(Math.random()*4)+3
+                image(goblini,movexg,70,453,500)
+
+            }
+            if (health <0){
+                health = 0
+            }
+            if(enemyhealth <0){
+                enemyhealth = 0
+            }
+            //When the player kills the enemy
+            if (enemyhealth <= 0) {
+
+                if(once2 == 1){
+
+                    sessionStorage.setItem("moveX",moveX)
+                    sessionStorage.setItem("moveY",moveY)
+                    sessionStorage.setItem("telebat",telebat)
+                    sessionStorage.setItem("health",health)
+                    place = sessionStorage.getItem("place")
+                    once2 = 2
+                    document.getElementById("shadow").style.visibility = "visible"
+                    document.getElementById("win_window").style.visibility = "visible"
+                    document.getElementById("WoL").style.visibility = "visible"
+                    document.getElementById("WoL").innerHTML = "You Won"
+                    document.getElementById("xpr").style.visibility = "visible"
+                    document.getElementById("goldr").style.visibility = "visible"
+                    document.getElementById("continue").style.visibility = "visible"
+                    if (goblin === true){
+                        goldadd = Math.floor(Math.random()*6)+10
+                        xpadd = Math.floor(Math.random()*10)+20
+                    }
+                    else if(mushroom === true){
+                        goldadd = Math.floor(Math.random()*23)+15
+                        xpadd = Math.floor(Math.random()*30)+20
+
+                    }
+                    document.getElementById("goldr").innerHTML = goldadd +" Gold"
+                    document.getElementById("xpr").innerHTML  = xpadd +" XP"
+                    sessionStorage.setItem("xpadd",xpadd)
+                    sessionStorage.setItem("goldadd",goldadd)
+                    gold = sessionStorage.getItem("gold")
+                    xp = sessionStorage.getItem("xp")
+                    sessionStorage.setItem("gold",gold)
+                    sessionStorage.setItem("xp",xp)
+                }
+            }
+            ///When the player dies
+            else if ((health<=0)&&(once7 == 1)){
+                document.getElementById("shadow").style.visibility = "visible"
+                document.getElementById("shadow").style.backgroundColor = "red"
+                document.getElementById("win_window").style.visibility = "visible"
+                document.getElementById("WoL").style.visibility = "visible"
+                document.getElementById("WoL").innerHTML = "You are dead"
+                document.getElementById("xpr").style.visibility = "visible"
+                //time
+                const dateObj = new Date();
+                var month = dateObj.getUTCMonth() + 1; //months from 1-12
+                var day = dateObj.getUTCDate();
+                var year = dateObj.getUTCFullYear();
+                var hour = dateObj.getHours();
+                var minutes = dateObj.getMinutes();
+                time = hour + ":" + minutes + " " + month + "/" + (day-1) + "/" + year;
+                document.getElementById("xpr").innerHTML = "Died On " + time
+                document.getElementById("goldr").style.visibility = "visible"
+                if (goblin===true){
+                    fromdeath = "Died From a Goblin Attack"
+                }
+                else if(mushroom ===true){
+                    fromdeath = "Died From a Mushroom Attack"
+                }
+                document.getElementById("goldr").innerHTML = fromdeath
+                document.getElementById("restart").style.visibility = "visible"
+                once7 = 2
+            }
+            ///Below will be player moves
+            if (keyCode === 49){
+                //Highlight text
+                document.getElementById("slash").innerHTML = "<mark>1:Slash</mark>"
+                document.getElementById("stab").innerHTML = "2:Stab"
+                document.getElementById("block").innerHTML = "3:Block"
+                document.getElementById("dodge").innerHTML = "4:Dodge"
+                document.getElementById("rest").innerHTML = "5:Rest"
+                //If player press enter the move is intiated
+                done = false
+                slash = true
+                stab = false;
+                block = false;
+                dodge = false;
+                rest = false;
+                warning = true
+                music_start = true
+               
+
+            }
+            else if(keyCode === 50){
+                //Highlight text
+                document.getElementById("slash").innerHTML = "1:Slash"
+                document.getElementById("stab").innerHTML = "<mark>2:Stab</mark>"
+                document.getElementById("block").innerHTML = "3:Block"
+                document.getElementById("dodge").innerHTML = "4:Dodge"
+                document.getElementById("rest").innerHTML = "5:Rest"
+                done = false
+                slash = false;
+                stab = true;
+                block = false;
+                dodge = false;
+                rest = false;
+                warning = true
+                music_start = true
+            }
+            else if(keyCode === 51){
+                //Highlight text
+                document.getElementById("slash").innerHTML = "1:Slash"
+                document.getElementById("stab").innerHTML = "2:Stab"
+                document.getElementById("block").innerHTML = "<mark>3:Block</mark>"
+                document.getElementById("dodge").innerHTML = "4:Dodge"
+                document.getElementById("rest").innerHTML = "5:Rest"
+                done = false
+                slash = false;
+                stab = false;
+                block = true;
+                dodge = false;
+                rest = false;
+                warning = true
+                music_start = true
+            }
+            else if(keyCode === 52){
+                //Highlight text
+                document.getElementById("slash").innerHTML = "1:Slash"
+                document.getElementById("stab").innerHTML = "2:Stab"
+                document.getElementById("block").innerHTML = "3:Block"
+                document.getElementById("dodge").innerHTML = "<mark>4:Dodge</mark>"
+                document.getElementById("rest").innerHTML = "5:Rest"
+                done = false
+                slash = false;
+                stab = false;
+                block = false;
+                dodge = true;
+                rest = false;
+                warning = true
+                music_start = true
+            }
+            else if(keyCode === 53){
+                //Highlight text
+                document.getElementById("slash").innerHTML = "1:Slash"
+                document.getElementById("stab").innerHTML = "2:Stab"
+                document.getElementById("block").innerHTML = "3:Block"
+                document.getElementById("dodge").innerHTML = "4:Dodge"
+                document.getElementById("rest").innerHTML = "<mark>5:Rest</mark>"
+                done = false
+                slash = false;
+                stab = false;
+                block = false;
+                dodge = false;
+                rest = true;
+                warning = true
+                music_start = true
+            }
+            //Player attacks
+            
+            if ((keyCode === 13)&&(done === false)&&(wait === true)){
+                warning2 = true
+                wait= false
+                document.getElementById("playeranimation").style.animation = "again 1ms"
+
+                document.getElementById("playeranimation1").style.animation = "again 1ms"
+
+                document.getElementById("enemyanimation").style.animation = "again 1ms"
+
+                document.getElementById("enemyanimation1").style.animation = "again 1ms"
+                if(slash === true){
+                    
+                    if (stamina<=11){
+                        outofbreath = true
+                        enemyblunder()
+                    }
+                    else{
+                        stamina -= 12
+                        
+                    }
+                    if(outofbreath === false){
+                        //Player Movement
+                        setTimeout(() => {  wait = true }, 5000);
+                            movex -=200
+                            setTimeout(() => { movex-=200 }, 200);
+                            setTimeout(() => { movex-=200 }, 200);
+                            setTimeout(() => { movex-=100 }, 200);
+                            setTimeout(() => { movex-=100 }, 200);
+
+
+                        //Slash attack
+                        setTimeout(() => {   
+                            if (counta1 == 1){
+                                document.getElementById("playeranimation").style.animation = "playerattackslash 1.5s linear"
+                                counta1 = 2
+                            }
+                            else if(counta1 == 2){
+                                document.getElementById("playeranimation1").style.animation = "playerattackslash 1.5s linear"
+                                counta1 = 1
+                            }
+                            
+                            if(levelup=="true"){
+                                enemyhealth -= Math.floor(Math.random()*9)+6
+                            }
+                            else{
+                                enemyhealth -= Math.floor(Math.random()*6)+4
+
+                            }
+
+
+
+                        }, 1000);
+
+                        setTimeout(() => { movex+=200 }, 2200);
+                        setTimeout(() => { movex+=200 }, 2400);
+                        setTimeout(() => { movex+=200 }, 2600);
+                        setTimeout(() => { movex+=100 }, 2800);
+                        setTimeout(() => { movex+=100 }, 3000);
+                    }
+                    enemyblunder()
+                    
+
+                }
+                else if(stab === true){
+                    
+                    if (stamina<=7){
+                        outofbreath = true
+                        enemyblunder()
+                    }
+                    else{
+                        stamina -= 8
+
+                    }
+                    if (outofbreath === false){
+                        
+                        setTimeout(() => {  wait = true }, 5500);
+                        movex -=200
+                        setTimeout(() => { movex-=200 }, 200);
+                        setTimeout(() => { movex-=200 }, 200);
+                        setTimeout(() => { movex-=100 }, 200);
+                        setTimeout(() => { movex-=100 }, 200);
+
+
+                        setTimeout(() => { 
+                            if (counta2 == 1){
+                                document.getElementById("playeranimation").style.animation = "playerattackstab 1.5s linear"
+                                counta2 = 2
+                            }
+                            else if(counta2 == 2){
+                                document.getElementById("playeranimation1").style.animation = "playerattackstab 1.5s linear"
+                                counta2 = 1
+                            }
+
+                            if(levelup=="true"){
+                                enemyhealth -= Math.floor(Math.random()*10)+9
+
+                            }
+                            else{
+                                enemyhealth -= Math.floor(Math.random()*8)+6
+                            }
+                        
+                        
+                        }, 1000);
+
+                        setTimeout(() => { movex+=200 }, 2200);
+                        setTimeout(() => { movex+=200 }, 2400);
+                        setTimeout(() => { movex+=200 }, 2600);
+                        setTimeout(() => { movex+=100 }, 2800);
+                        setTimeout(() => { movex+=100 }, 3000);
+                        
+                    }
+                    //Only attacks individual enemy. WHen their is multiple enemies I must be able to choose which enemy I must attack
+                    enemyblunder()
+
+                }
+                else if(block === true){
+                    if (stamina<=4){
+                        outofbreath = true
+                        enemyblunder()
+                    }
+                    else{
+                        stamina -= 5
+
+                    }
+                    if (outofbreath === false){
+                        block = true
+                        setTimeout(() => {  wait = true }, 3000);
+                    }
+                    else{
+                        block = false
+                    }
+                    enemyblunder()
+
+                }
+                else if(dodge === true){
+                    
+                    if (stamina<=6){
+                        outofbreath = true
+                        enemyblunder()
+                    }
+                    else{
+                        stamina -= 7
+
+                    }
+                    if (outofbreath === false){
+                        rani = Math.floor(Math.random()*2)+1
+                        setTimeout(() => {  wait = true }, 3000);
+                        
+                        
+                    }
+                    else{
+                        rani = 2
+                    }
+                    
+                    enemyblunder()
+                    
+                    
+                    
+
+                }
+                else if(rest === true){
+                    health += Math.floor(Math.random()*8)+2
+                    stamina += Math.floor(Math.random()*15)+10
+                    outofbreath = false
+                    enemyblunder()
+                    setTimeout(() => {  wait = true }, 3000);
+                
+                    
+
+                }
+                done = true
+                
+                
+            }
+
+
+
+
+
+            
+
+            
+        }
+        function contin(){
+            location.href = place
+
+        }
+        function enemyblunder(){
+            if (block === true){
+                enemyattack -= Math.floor(Math.random()*6)+2
+                if (enemyattack <= 0){
+                    enemyattack = 0
+                }
+            }
+            
+            if(goblin===true){
+                if ((slash===true)||(stab===true)){
+                    setTimeout(() => { movexg+=200 }, 3500);
+                    setTimeout(() => { movexg+=200 }, 3700);
+                    setTimeout(() => { movexg+=200 }, 3900);
+                    setTimeout(() => { movexg+=100 }, 4100);
+                    setTimeout(() => { movexg+=100 }, 4300);
+
+
+                    setTimeout(() => {
+                    if (counte1 == 1){
+                        document.getElementById("enemyanimation").style.animation = "enemyattackg 1.5s linear"
+                        counte1 = 2
+                        }
+                    else if(counte1 == 2){
+                            document.getElementById("enemyanimation1").style.animation = "enemyattackg 1.5s linear"
+                            counte1 = 1
+                    }
+                    health -= enemyattack
+                    }, 4500);
+                    setTimeout(() => { movexg-=200 }, 5500);
+                    setTimeout(() => { movexg-=200 }, 5700);
+                    setTimeout(() => { movexg-=200 }, 5900);
+                    setTimeout(() => { movexg-=100 }, 6100);
+                    setTimeout(() => { movexg-=100 }, 6300);
+                }
+                else if((rest===true)||(block===true)){
+                    setTimeout(() => { movexg+=200 }, 200);
+                    setTimeout(() => { movexg+=200 }, 400);
+                    setTimeout(() => { movexg+=200 }, 600);
+                    setTimeout(() => { movexg+=100 }, 800);
+                    setTimeout(() => { movexg+=100 }, 1000);
+
+
+                    setTimeout(() => {
+                    if (counte1 == 1){
+                        document.getElementById("enemyanimation").style.animation = "enemyattackg 1.5s linear"
+                        counte1 = 2
+                        }
+                    else if(counte1 == 2){
+                            document.getElementById("enemyanimation1").style.animation = "enemyattackg 1.5s linear"
+                            counte1 = 1
+                    }
+                    health -= enemyattack
+                    }, 1100);
+                    setTimeout(() => { movexg-=200 }, 2500);
+                    setTimeout(() => { movexg-=200 }, 2700);
+                    setTimeout(() => { movexg-=200 }, 2900);
+                    setTimeout(() => { movexg-=100 }, 2100);
+                    setTimeout(() => { movexg-=100 }, 2300);
+
+
+                }
+                else if(dodge===true){
+                    if(rani==1){
+                        setTimeout(() => { movexg+=200 }, 200);
+                        setTimeout(() => { movexg+=200 }, 400);
+                        setTimeout(() => { movexg+=200 }, 600);
+                        setTimeout(() => { movexg+=100 }, 800);
+                        setTimeout(() => { movexg+=100 }, 1000);
+                        setTimeout(() => { movex+=200 }, 1200);
+
+
+                        setTimeout(() => {
+                        if (counte1 == 1){
+                            document.getElementById("enemyanimation").style.animation = "enemyattackg 1.5s linear"
+                            counte1 = 2
+                            }
+                        else if(counte1 == 2){
+                                document.getElementById("enemyanimation1").style.animation = "enemyattackg 1.5s linear"
+                                counte1 = 1
+                        }}, 1400);
+                            setTimeout(() => { movexg-=200 }, 2800);
+                            //Moving back MC
+                            setTimeout(() => { movex-=200 }, 3000);
+                            setTimeout(() => { movexg-=200 }, 3000);
+                            setTimeout(() => { movexg-=200 }, 3200);
+                            setTimeout(() => { movexg-=100 }, 3400);
+                            setTimeout(() => { movexg-=100 }, 3600);
+
+                    }
+                    else if(rani==2){
+                        setTimeout(() => { movexg+=200 }, 200);
+                        setTimeout(() => { movexg+=200 }, 400);
+                        setTimeout(() => { movexg+=200 }, 600);
+                        setTimeout(() => { movexg+=100 }, 800);
+                        setTimeout(() => { movexg+=100 }, 1000);
+
+
+                        setTimeout(() => {
+                        if (counte1 == 1){
+                            document.getElementById("enemyanimation").style.animation = "enemyattackg 1.5s linear"
+                            counte1 = 2
+                            }
+                        else if(counte1 == 2){
+                                document.getElementById("enemyanimation1").style.animation = "enemyattackg 1.5s linear"
+                                counte1 = 1
+                        }
+                        health -= enemyattack
+                        }, 1100);
+                        setTimeout(() => { movexg-=200 }, 2500);
+                        setTimeout(() => { movexg-=200 }, 2700);
+                        setTimeout(() => { movexg-=200 }, 2900);
+                        setTimeout(() => { movexg-=100 }, 2100);
+                        setTimeout(() => { movexg-=100 }, 2300);
+
+                    }
+                    else{
+                        setTimeout(() => { movexg+=200 }, 200);
+                        setTimeout(() => { movexg+=200 }, 400);
+                        setTimeout(() => { movexg+=200 }, 600);
+                        setTimeout(() => { movexg+=100 }, 800);
+                        setTimeout(() => { movexg+=100 }, 1000);
+
+
+                        setTimeout(() => {
+                        if (counte1 == 1){
+                            document.getElementById("enemyanimation").style.animation = "enemyattackg 1.5s linear"
+                            counte1 = 2
+                        }
+                        else if(counte1 == 2){
+                            document.getElementById("enemyanimation1").style.animation = "enemyattackg 1.5s linear"
+                            counte1 = 1
+                        }
+                        health -= enemyattack
+                        }, 1100);
+                        setTimeout(() => { movexg-=200 }, 2500);
+                        setTimeout(() => { movexg-=200 }, 2700);
+                        setTimeout(() => { movexg-=200 }, 2900);
+                        setTimeout(() => { movexg-=100 }, 2100);
+                        setTimeout(() => { movexg-=100 }, 2300);
+
+                    }
+
+                }
+                 
+            }
+            else if(mushroom ===true){
+
+            }
+            
+
+            document.getElementById("slash").innerHTML = "1:Slash"
+            document.getElementById("stab").innerHTML = "2:Stab"
+            document.getElementById("block").innerHTML = "3:Block"
+            document.getElementById("dodge").innerHTML = "4:Dodge"
+            document.getElementById("rest").innerHTML = "5:Rest"
+            slash = false
+            stab = false
+            block = false
+            dodge = false
+            rest = false
+
+        }
+        function mouseMoved() {
+            music_start = true
+        }
+
+
+
+    </script>
+    
+</body>
+</html>
