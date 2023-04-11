@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.5.0/p5.min.js" 
+    integrity="sha512-WJXVjqeINVpi5XXJ2jn0BSCfp0y80IKrYh731gLRnkAS9TKc5KNt/OfLtu+fCueqdWniouJ1ubM+VI/hbo7POQ==" 
+    crossorigin="anonymous" 
+    referrerpolicy="no-referrer">
+    </script>
+    <!-- Includes the p5.collide2D addon library -->
+    <script defer src="https://unpkg.com/p5.collide2d"></script>
+    <!-- refrence external javasript -->
+    <script src="script.js"></script>
+    <link href="style.css" rel="stylesheet" type="text/css" />  
+    <link href="https://fonts.cdnfonts.com/css/common-pixel" rel="stylesheet">
+    <style>
+           @import url('https://fonts.cdnfonts.com/css/common-pixel');
+   </style>
+    
+     <!-- Sound Library-->
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.5.0/addons/p5.sound.js" integrity="sha512-TU9AWtV5uUZPX8dbBAH8NQF1tSdigPRRT82vllAQ1Ke28puiqLA6ZVKxtUGlgrH6yWFnkKy+sE6luNEGH9ar0A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body id="bodyl3">
+    <div id = "image_text"></div>
+    <h1 id = "display_text"></h1>
+    <div id="image_pic"></div>
+    <div id="box_text"><span id = "common_text">This is a common text. <br>Just a waste of space</span></div>
+    <div id="stat_menu">
+        <div id="line1"></div>
+        <div id="line2"></div>
+        <div id="line3"></div>
+        <hr id="line4">
+        <span id="healthstat">Health</span>
+        <span id="healthn"></span>
+        <span id="gold">Gold</span>
+        <span id="goldn"></span>
+        <span id="xp">Experience</span>
+        <span id="xpn"></span>
+    </div>
+
+<script>
+    let w = window.innerWidth;
+    let h = window.innerHeight;
+    let moveX = 120
+    let moveY = 160
+    let stuck = false;
+    musiconce = 1
+    //Hit variabls
+    
+    let once = 1;
+    let once1 = 1;
+    let once4 = 1;
+    let check1 = 1
+    goback = true;
+    //NN
+    suattack = false;
+    gold = sessionStorage.getItem("gold")
+    xp = sessionStorage.getItem("xp")
+    health = sessionStorage.getItem("health")
+    telebat = sessionStorage.getItem("telebat")
+   if(telebat=="true"){
+       moveX = sessionStorage.getItem("moveX")
+       moveY = sessionStorage.getItem("moveY")
+       moveX = parseInt(moveX)
+       moveY = parseInt(moveY)
+
+   }
+    
+    ///////
+function preload() {
+    soundFormats('mp3',"ogg")
+    levelm1 = loadSound('levelm1.mp3')
+}
+    function setup() {
+        
+        createCanvas(w,h);
+        right = loadImage('right.png')
+        left = loadImage("left.png")
+        up = loadImage("up.png")
+        down = loadImage("down.png")
+        levelm1.setVolume(1.0);
+        levelm1.play()
+            
+
+        
+    }
+    function draw(){
+        clear()
+    //Music
+    if((musiconce == 1)&&(music_start===true)){
+            userStartAudio()
+            musiconce=2
+        }
+        if (levelm1.isPlaying()){
+
+        }
+        else{
+            levelm1.loop()
+            }
+        noStroke()
+        fill(color(0,0,0,0.2))
+        if(fate ==1){
+            suattack = true
+        }
+
+        //Surprise Attack function
+
+        if(suattack === true){
+            suattack= false
+
+            document.getElementById("display_text").innerHTML = ""
+            document.getElementById("image_text").style.visibility = "visible"
+            document.getElementById("common_text").style.visibility = "visible"
+            document.getElementById("common_text").innerHTML = "You Humaaaaan! <br> I gos gent you"
+            document.getElementById("image_pic").style.visibility = "visible"
+            document.getElementById("image_pic").style.backgroundImage = "url('Goblin_head.png')"
+            stuck = true
+           
+            setTimeout(function(){
+
+            onkeypress = function(){
+               
+                    document.getElementById("image_text").style.visibility = "hidden"
+                    document.getElementById("common_text").style.visibility = "hidden"
+                    document.getElementById("image_pic").style.visibility = "hidden"
+                    stuck = false
+
+                    once4 = 2
+                    if (once1 == 1){
+                        once1 = 2
+                        place = "l3.html"
+                        telebat = true
+                        goblin = true
+                        sessionStorage.setItem("levelup",levelup)
+                        sessionStorage.setItem("once4",once4)
+                        sessionStorage.setItem("moveX",moveX)
+                        sessionStorage.setItem("moveY",moveY)
+                        sessionStorage.setItem("telebat",telebat)
+                        sessionStorage.setItem("place",place)
+                        sessionStorage.setItem("health",health)
+                        sessionStorage.setItem("goblin",goblin)
+                        ranattack()
+                    }
+        
+                }
+
+            }, 2000); 
+
+          
+
+        }
+        
+        sessionStorage.setItem("health",health)
+        sessionStorage.setItem("xp",xp)
+        sessionStorage.setItem("gold",gold)
+
+
+        if ((gold===undefined)||(gold===NaN)){
+        gold = 0
+         }
+        if ((xp===undefined)||(xp===NaN)){
+            xp = 0
+        }
+        gold = parseInt(gold)
+        xp = parseInt(xp)
+        
+        
+        if(xp>=100){
+            xp-=100
+            levelup = true
+            sessionStorage.setItem("levelup",levelup)
+        }
+        health = parseInt(health)
+        //Stats info & placement
+        if((health >= 100)||(health>=10)){
+            document.getElementById("healthn").style.right = "80%"
+        }
+        
+        document.getElementById("goldn").innerHTML = gold
+        document.getElementById("healthn").innerHTML = health
+        document.getElementById("xpn").innerHTML = xp
+        console.log(health)
+        //makes sure that the health starts at 100
+        maxhealth = 100
+
+        
+       
+        
+        if (keyIsDown(65)) {
+            if ((moveX > 0)&&(stuck === false)){
+                moveX = moveX -5;
+                
+                moveleft = true
+                moveup = false
+                movedown = false
+                
+                setTimeout(() => { fate = Math.floor(Math.random() * (20 - 1 + 1)) + 1; }, 2000);
+
+            }
+            
+        }
+    if (keyIsDown(68)){
+        if ((moveX < 1820)&&(stuck === false)){
+            moveX = moveX +5;
+            moveright = true
+            moveleft = false
+            moveup = false
+            movedown = false
+            setTimeout(() => { fate = Math.floor(Math.random() * (20 - 1 + 1)) + 1; }, 2000);
+
+            
+        }
+        
+
+    }
+    if (keyIsDown(83)){
+        if ((moveY < 675)&&(stuck === false)){
+            moveY = moveY +5;
+            movedown = true
+            moveup = false
+            moveleft = false
+            setTimeout(() => { fate = Math.floor(Math.random() * (20 - 1 + 1)) + 1; }, 2000);
+
+
+        }
+
+    }
+    if (keyIsDown(87)){
+        if ((moveY > 0)&&(stuck === false)){
+        
+            moveY = moveY -5;
+            moveup = true
+            movedown = false
+            moveleft = false
+            setTimeout(() => { fate = Math.floor(Math.random() * (20 - 1 + 1)) + 1; }, 2000);
+
+        }
+    }
+    rect(moveX,moveY,100,100)
+        if (moveup === true){
+            image(up,moveX,moveY,150,150)
+            movedown = false
+            moveleft = false
+
+        }
+        else if(movedown === true){
+            image(down,moveX,moveY,150,100)
+            moveup = false
+            moveleft = false
+        }
+        else if(moveleft === true){
+            image(left,moveX,moveY,110,130)
+            moveup = false
+            movedown = false
+        }
+        else if (moveright === true){
+            image(right,moveX,moveY,150,170)
+        }
+        else{
+            image(right,moveX,moveY,150,150)
+        }
+
+
+
+
+    //LOADED@#!
+    noStroke()
+    fill(color(0,0,0,0.2))
+
+        
+    if(gobacktol1===true){
+        if(once==1){
+            once+=1
+            window.location.href = "l1.html"
+        }
+    }
+
+
+    if(gotol4===true){
+        if(once==1){
+            once+=1
+            window.location.href = "l4.html"
+        }
+    }
+}
+        
+function mouseMoved() {
+            music_start = true
+        }
+
+</script>
+
+    
+</body>
+</html>

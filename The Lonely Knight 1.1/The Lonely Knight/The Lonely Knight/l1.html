@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.5.0/p5.min.js" 
+    integrity="sha512-WJXVjqeINVpi5XXJ2jn0BSCfp0y80IKrYh731gLRnkAS9TKc5KNt/OfLtu+fCueqdWniouJ1ubM+VI/hbo7POQ==" 
+    crossorigin="anonymous" 
+    referrerpolicy="no-referrer">
+    </script>
+    <!-- Includes the p5.collide2D addon library -->
+    <script defer src="https://unpkg.com/p5.collide2d"></script>
+    <!-- refrence external javasript -->
+    <script src="script.js"></script>
+    <link href="style.css" rel="stylesheet" type="text/css" />  
+    <link href="https://fonts.cdnfonts.com/css/common-pixel" rel="stylesheet">
+    <style>
+           @import url('https://fonts.cdnfonts.com/css/common-pixel');
+   </style>
+     <!-- Sound Library-->
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.5.0/addons/p5.sound.js" integrity="sha512-TU9AWtV5uUZPX8dbBAH8NQF1tSdigPRRT82vllAQ1Ke28puiqLA6ZVKxtUGlgrH6yWFnkKy+sE6luNEGH9ar0A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    
+</head>
+<body id="bodyl1">
+    <div id = "image_text"></div>
+    <h1 id = "display_text"></h1>
+    <div id="image_pic"></div>
+    <div id="box_text"><span id = "common_text">This is a common text. <br>Just a waste of space</span></div>
+    <div id="stat_menu">
+        <div id="line1"></div>
+        <div id="line2"></div>
+        <div id="line3"></div>
+        <hr id="line4">
+        <span id="healthstat">Health</span>
+        <span id="healthn"></span>
+        <span id="gold">Gold</span>
+        <span id="goldn"></span>
+        <span id="xp">Experience</span>
+        <span id="xpn"></span>
+    </div>
+
+<script>
+    let w = window.innerWidth;
+    let h = window.innerHeight;
+    let moveX1 = 120
+    let moveY1 = 160
+    let stuck = false;
+    musiconce = 1
+    //Hit variabls
+    let telebat1 = false
+    let once = 1;
+    let once1 = 1;
+    let once4 = 1;
+    let check1 = 1
+    let gobackl1 = sessionStorage.getItem("gobackl1")
+    goback = true;
+    firsttime = sessionStorage.getItem("firsttime")
+    //NN
+
+    if(gobackl1=="true"){
+        moveX1 = 1500
+        moveY1 = 80
+    }
+
+
+
+
+    suattack = false;
+    health = sessionStorage.getItem("health")
+
+    telebat1 = sessionStorage.getItem("telebat1")
+    
+    if(firsttime=="true"){
+        xp = sessionStorage.getItem("xp")
+        gold = sessionStorage.getItem("gold")
+        gold = parseInt(gold)
+        xp = parseInt(xp)
+    }
+    if(telebat1=="true"){
+        telebat1 = false
+        moveX1 = sessionStorage.getItem("moveX1")
+        moveY1 = sessionStorage.getItem("moveY1")
+        moveX1 = parseInt(moveX1)
+        moveY1 = parseInt(moveY1)
+        gold = sessionStorage.getItem("gold")
+        xp = sessionStorage.getItem("xp")
+        gold = parseInt(gold)
+        xp = parseInt(xp)
+        goldadd = sessionStorage.getItem("goldadd")
+        xpadd = sessionStorage.getItem("xpadd")
+        xpadd = parseInt(xpadd)
+        goldadd = parseInt(goldadd)
+        gold+=goldadd
+        xp+=xpadd
+        
+
+    }
+    
+    
+    ///////
+function preload() {
+    soundFormats('mp3',"ogg")
+    levelm1 = loadSound('levelm1.mp3')
+}
+    function setup() {
+        
+        createCanvas(w,h);
+        right = loadImage('right.png')
+        left = loadImage("left.png")
+        up = loadImage("up.png")
+        down = loadImage("down.png")
+        levelm1.setVolume(1.0);
+        levelm1.play()
+            
+
+        
+    }
+    function draw(){
+        clear()
+    //Music
+    if((musiconce == 1)&&(music_start===true)){
+            userStartAudio()
+            musiconce=2
+        }
+        if (levelm1.isPlaying()){
+
+        }
+        else{
+            levelm1.loop()
+            }
+        noStroke()
+        fill(color(0,0,0,0.2))
+        if(fate ==1){
+            suattack = true
+        }
+
+        //Surprise Attack function
+
+        if(suattack === true){
+            suattack= false
+
+            document.getElementById("display_text").innerHTML = ""
+            document.getElementById("image_text").style.visibility = "visible"
+            document.getElementById("common_text").style.visibility = "visible"
+            document.getElementById("common_text").innerHTML = "You Humaaaaan! <br> I gos gent you"
+            document.getElementById("image_pic").style.visibility = "visible"
+            document.getElementById("image_pic").style.backgroundImage = "url('Goblin_head.png')"
+            stuck = true
+           
+            setTimeout(function(){
+
+            onkeypress = function(){
+               
+                    document.getElementById("image_text").style.visibility = "hidden"
+                    document.getElementById("common_text").style.visibility = "hidden"
+                    document.getElementById("image_pic").style.visibility = "hidden"
+                    stuck = false
+
+                    once4 = 2
+                    if (once1 == 1){
+                        once1 = 2
+                        place = "l1.html"
+                        telebat1 = true
+                        goblin = true
+                        sessionStorage.setItem("levelup",levelup)
+                        sessionStorage.setItem("once4",once4)
+                        sessionStorage.setItem("moveX1",moveX1)
+                        sessionStorage.setItem("moveY1",moveY1)
+                        sessionStorage.setItem("telebat1",telebat1)
+                        sessionStorage.setItem("place",place)
+                        sessionStorage.setItem("health",health)
+                        sessionStorage.setItem("goblin",goblin)
+                        ranattack()
+                    }
+        
+                }
+
+            }, 2000); 
+
+          
+
+        }
+        
+        sessionStorage.setItem("health",health)
+        sessionStorage.setItem("xp",xp)
+        sessionStorage.setItem("gold",gold)
+
+
+        if ((gold===undefined)||(gold===NaN)){
+        gold = 0
+         }
+        if ((xp===undefined)||(xp===NaN)){
+            xp = 0
+        }
+        gold = parseInt(gold)
+        xp = parseInt(xp)
+        
+        
+        if(xp>=100){
+            xp-=100
+            levelup = true
+            sessionStorage.setItem("levelup",levelup)
+        }
+        health = parseInt(health)
+        //Stats info & placement
+        if((health >= 100)||(health>=10)){
+            document.getElementById("healthn").style.right = "80%"
+        }
+        
+        document.getElementById("goldn").innerHTML = gold
+        document.getElementById("healthn").innerHTML = health
+        document.getElementById("xpn").innerHTML = xp
+        console.log(health)
+        //makes sure that the health starts at 100
+        maxhealth = 100
+
+        
+       
+        
+        if (keyIsDown(65)) {
+            if ((moveX1 > 0)&&(stuck === false)){
+                moveX1 = moveX1 -5;
+                
+                moveleft = true
+                moveup = false
+                movedown = false
+                
+                setTimeout(() => { fate = Math.floor(Math.random() * (20 - 1 + 1)) + 1; }, 4000);
+
+            }
+            
+        }
+    if (keyIsDown(68)){
+        if ((moveX1 < 1820)&&(stuck === false)){
+            moveX1 = moveX1 +5;
+            moveright = true
+            moveleft = false
+            moveup = false
+            movedown = false
+            setTimeout(() => { fate = Math.floor(Math.random() * (20 - 1 + 1)) + 1; }, 4000);
+
+            
+        }
+        
+
+    }
+    if (keyIsDown(83)){
+        if ((moveY1 < 675)&&(stuck === false)){
+            moveY1 = moveY1 +5;
+            movedown = true
+            moveup = false
+            moveleft = false
+            setTimeout(() => { fate = Math.floor(Math.random() * (20 - 1 + 1)) + 1; }, 4000);
+
+
+        }
+
+    }
+    if (keyIsDown(87)){
+        if ((moveY1 > 0)&&(stuck === false)){
+        
+            moveY1 = moveY1 -5;
+            moveup = true
+            movedown = false
+            moveleft = false
+            setTimeout(() => { fate = Math.floor(Math.random() * (20 - 1 + 1)) + 1; }, 4000);
+
+        }
+    }
+    rect(moveX1,moveY1,100,100)
+        if (moveup === true){
+            image(up,moveX1,moveY1,150,150)
+            movedown = false
+            moveleft = false
+
+        }
+        else if(movedown === true){
+            image(down,moveX1,moveY1,150,100)
+            moveup = false
+            moveleft = false
+        }
+        else if(moveleft === true){
+            image(left,moveX1,moveY1,110,130)
+            moveup = false
+            movedown = false
+        }
+        else if (moveright === true){
+            image(right,moveX1,moveY1,150,170)
+        }
+        else{
+            image(right,moveX1,moveY1,150,150)
+        }
+
+
+    //LOADED@#!
+    noStroke()
+    fill(color(0,0,0,0.2))
+        
+    rect(0,96,100,400)
+    rect(1550,0,200,50)
+    gotol2 = collideRectRect(moveX1,moveY1,100,100,1550,0,200,50)
+    if(gotol2 === true){
+        if(once==1){
+            once+=1
+            window.location.href = "l2.html"
+        }
+    }
+   
+    rect(1860,570,50,200)
+    gotol3=collideRectRect(moveX1,moveY1,100,100,1860,570,50,200)
+    if (gotol3===true){
+        if(once == 1){
+            once+=1
+            console.log("It happened")
+            
+            window.location.href="l3.html"
+        }
+    }
+}
+
+function mouseMoved() {
+            music_start = true
+        }
+
+
+
+
+</script>
+    
+    
+</body>
+</html>
