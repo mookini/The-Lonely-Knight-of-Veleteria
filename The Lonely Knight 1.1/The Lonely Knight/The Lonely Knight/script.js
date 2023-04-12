@@ -56,6 +56,8 @@ let music_start;
 let levelm1;
 let battlem1;
 let musiconce;
+//Upgrades
+let armor;
 function ranattack(){
     sessionStorage.setItem("health",health)
     window.location.href = "ranenemy.html"
