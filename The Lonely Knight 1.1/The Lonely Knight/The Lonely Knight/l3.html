@@ -40,17 +40,19 @@
 <script>
     let w = window.innerWidth;
     let h = window.innerHeight;
-    let moveX = 120
-    let moveY = 160
+    let moveX = 70
+    let moveY = 410
     let stuck = false;
     musiconce = 1
     //Hit variabls
-    
+    let gobackl11;
     let once = 1;
     let once1 = 1;
     let once4 = 1;
     let check1 = 1
     goback = true;
+    let gobackl3 = sessionStorage.getItem("gobackl3")
+    armor = sessionStorage.getItem("armor")
     //NN
     suattack = false;
     gold = sessionStorage.getItem("gold")
@@ -64,7 +66,10 @@
        moveY = parseInt(moveY)
 
    }
-    
+   if(gobackl3=="true"){
+    moveX = 1770
+    moveY = 550
+   }
     ///////
 function preload() {
     soundFormats('mp3',"ogg")
@@ -110,7 +115,30 @@ function preload() {
             document.getElementById("display_text").innerHTML = ""
             document.getElementById("image_text").style.visibility = "visible"
             document.getElementById("common_text").style.visibility = "visible"
-            document.getElementById("common_text").innerHTML = "You Humaaaaan! <br> I gos gent you"
+            randomin=Math.floor(Math.random() * 5)
+            if(randomin ==1){
+                document.getElementById("common_text").innerHTML = "I Will kill you<br>slowly"
+            }
+            else if(randomin == 2){
+                document.getElementById("common_text").innerHTML = "I will use<br>your flesh as<br>my blanket"
+
+            }
+            else if(randomin == 3){
+                document.getElementById("common_text").innerHTML = "Your head<br>will be my<br>trophy"
+
+            }
+            else if(randomin == 4){
+                document.getElementById("common_text").innerHTML = "You are my<br>next meal"
+
+            }
+            else if(randomin == 5){
+                document.getElementById("common_text").innerHTML = "I can taste<br>your defeat<br>and it tastes<br>like sugar"
+
+            }
+            else{
+                document.getElementById("common_text").innerHTML = "I can taste<br>your defeat<br>and it tastes<br>like sugar"
+
+            }
             document.getElementById("image_pic").style.visibility = "visible"
             document.getElementById("image_pic").style.backgroundImage = "url('Goblin_head.png')"
             stuck = true
@@ -130,6 +158,8 @@ function preload() {
                         place = "l3.html"
                         telebat = true
                         goblin = true
+                        sandinc=true
+                        sessionStorage.setItem("sandinc",sandinc)
                         sessionStorage.setItem("levelup",levelup)
                         sessionStorage.setItem("once4",once4)
                         sessionStorage.setItem("moveX",moveX)
@@ -180,9 +210,12 @@ function preload() {
         document.getElementById("xpn").innerHTML = xp
         console.log(health)
         //makes sure that the health starts at 100
-        maxhealth = 100
-
-        
+        if (armor=="true"){
+            maxhealth = 150
+        }
+        else{
+            maxhealth = 100
+        }
        
         
         if (keyIsDown(65)) {
@@ -193,7 +226,7 @@ function preload() {
                 moveup = false
                 movedown = false
                 
-                setTimeout(() => { fate = Math.floor(Math.random() * (20 - 1 + 1)) + 1; }, 2000);
+                setTimeout(() => { fate = Math.floor(Math.random() * (75 - 1 + 1)) + 1; }, 2000);
 
             }
             
@@ -205,7 +238,7 @@ function preload() {
             moveleft = false
             moveup = false
             movedown = false
-            setTimeout(() => { fate = Math.floor(Math.random() * (20 - 1 + 1)) + 1; }, 2000);
+            setTimeout(() => { fate = Math.floor(Math.random() * (75 - 1 + 1)) + 1; }, 2000);
 
             
         }
@@ -218,7 +251,7 @@ function preload() {
             movedown = true
             moveup = false
             moveleft = false
-            setTimeout(() => { fate = Math.floor(Math.random() * (20 - 1 + 1)) + 1; }, 2000);
+            setTimeout(() => { fate = Math.floor(Math.random() * (75 - 1 + 1)) + 1; }, 2000);
 
 
         }
@@ -231,7 +264,7 @@ function preload() {
             moveup = true
             movedown = false
             moveleft = false
-            setTimeout(() => { fate = Math.floor(Math.random() * (20 - 1 + 1)) + 1; }, 2000);
+            setTimeout(() => { fate = Math.floor(Math.random() * (75 - 1 + 1)) + 1; }, 2000);
 
         }
     }
@@ -265,11 +298,16 @@ function preload() {
     //LOADED@#!
     noStroke()
     fill(color(0,0,0,0.2))
-
-        
+    
+    rect(0,500,50,100)
+    rect(1850,550,50,100)
+    gobacktol1=collideRectRect(moveX,moveY,40,40,0,500,50,100)
+    gotol4=collideRectRect(moveX,moveY,40,40,1850,550,50,100)
     if(gobacktol1===true){
         if(once==1){
             once+=1
+            gobackl11 = true
+            sessionStorage.setItem("gobackl11",gobackl11)
             window.location.href = "l1.html"
         }
     }
@@ -278,6 +316,8 @@ function preload() {
     if(gotol4===true){
         if(once==1){
             once+=1
+            gobackl3 = true
+            sessionStorage.setItem("gobackl3",gobackl3)
             window.location.href = "l4.html"
         }
     }

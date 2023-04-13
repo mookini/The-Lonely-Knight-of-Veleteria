@@ -67,13 +67,14 @@
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-image: url(sand.png);
+    background-image: url(l3.png);
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-    background-position: 0.02vh;
     background-repeat: no-repeat;
+    background-position-y: -10vw;
+
     
 }
 
@@ -81,7 +82,7 @@
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-image: url(grass.png);
+    background-image: url(l4.png);
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;

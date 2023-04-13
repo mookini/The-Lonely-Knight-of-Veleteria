@@ -56,6 +56,8 @@
     let blacksmithi;
     let once = 1;
     let once1 = 1;
+    let once2 = 1;
+    let once3 = 1;
     let once4 = 1;
     let check1 = 1
     let startchat1 = true
@@ -65,6 +67,7 @@
     let countcheck1 = -1
     let countcheck2 = -1
     let gobackl1;
+    armor = sessionStorage.getItem("armor")
     goback = true;
     gobacktol1 = false;
     //NN
@@ -161,9 +164,13 @@ function preload() {
         document.getElementById("xpn").innerHTML = xp
         console.log(health)
         //makes sure that the health starts at 100
-        maxhealth = 100
-
         
+        if (armor=="true"){
+            maxhealth = 150
+        }
+        else{
+            maxhealth = 100
+        }
        
         
         if (keyIsDown(65)) {
@@ -343,12 +350,14 @@ function preload() {
             document.getElementById("common_text").style.visibility = "visible"
             document.getElementById("image_pic").style.visibility = "visible"
             stuck = true
-            if(gold<120){
+            if((gold<120)&&(once2==1)){
                 nogold = true
-                armor = true
+                once2 = 2
+                armor = "true"
                 sessionStorage.setItem("armor",armor)
             }
-            else{
+            else if((gold>=120)&&(once2==1)){
+                once2 = 2
                 gold-=120
                 nogold=false
             }
@@ -389,8 +398,8 @@ function preload() {
                 
             }
 
-            if(countcheck1==3){
-                        
+            if(countcheck1>=3){
+                    once2 = 1
                    stuck = false
                     document.getElementById("image_text").style.visibility = "hidden"
                     document.getElementById("common_text").style.visibility = "hidden"
@@ -414,18 +423,20 @@ function preload() {
         if(merchant ===true){
             document.getElementById("display_text").innerHTML = "Press 'c' to buy a health potion for 20 gold"
             if(keyCode == 67){
-                document.getElementById("display_text").innerHTML = ""
-                document.getElementById("image_text").style.visibility = "visible"
-                document.getElementById("common_text").style.visibility = "visible"
-                document.getElementById("image_pic").style.visibility = "visible"
                 stuck = true
-                if(gold<20){
+                if((gold<20)&&(once3==1)){
+                    once3 = 1
                     noheal=true
                     
                 }
-                else{
+                else if((gold>=20)&&(once3==1)){
+                    once3 = 1
                     gold-=20
                     health+=70
+                    sessionStorage.setItem("gold",gold)
+                    if(health>maxhealth){
+                        health = maxhealth
+                    }
                     noheal = false
                  
                 }
@@ -435,6 +446,10 @@ function preload() {
                 countcheck2 += 1  
             }
             if((countcheck2==1)&&(noheal === true)){
+                document.getElementById("display_text").innerHTML = ""
+                document.getElementById("image_text").style.visibility = "visible"
+                document.getElementById("common_text").style.visibility = "visible"
+                document.getElementById("image_pic").style.visibility = "visible"
 
                 document.getElementById("image_pic").style.backgroundImage = "url('mhead.png')"
                 document.getElementById("image_pic").style.transform = "scaleX(1)"
@@ -452,6 +467,10 @@ function preload() {
 
             }
             if((countcheck2==1)&&(noheal === false)){
+                document.getElementById("display_text").innerHTML = ""
+                document.getElementById("image_text").style.visibility = "visible"
+                document.getElementById("common_text").style.visibility = "visible"
+                document.getElementById("image_pic").style.visibility = "visible"
 
                 document.getElementById("image_pic").style.backgroundImage = "url('mhead.png')"
                 document.getElementById("image_pic").style.transform = "scaleX(1)"
@@ -467,13 +486,14 @@ function preload() {
             }
 
 
-            if(countcheck2==3){
+            if(countcheck2>=3){
                         
                         stuck = false
                          document.getElementById("image_text").style.visibility = "hidden"
                          document.getElementById("common_text").style.visibility = "hidden"
                          document.getElementById("image_pic").style.visibility = "hidden"
                          countcheck2 = 0
+                         once3=0
                  }     
 
 
@@ -482,6 +502,7 @@ function preload() {
 
         }
         else{
+        
         }
    
    

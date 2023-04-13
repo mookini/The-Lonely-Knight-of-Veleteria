@@ -51,6 +51,8 @@ let time;
 ///Attack
 let suattack;
 let fate;
+let randomin;
+let sandinc;
 //Music
 let music_start;
 let levelm1;

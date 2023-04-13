@@ -53,6 +53,7 @@
     goback = true;
     //NN
     suattack = false;
+    armor = sessionStorage.getItem("armor")
     gold = sessionStorage.getItem("gold")
     xp = sessionStorage.getItem("xp")
     health = sessionStorage.getItem("health")
@@ -179,8 +180,12 @@ function preload() {
         document.getElementById("xpn").innerHTML = xp
         console.log(health)
         //makes sure that the health starts at 100
-        maxhealth = 100
-
+        if (armor=="true"){
+            maxhealth = 150
+        }
+        else{
+            maxhealth = 100
+        }
         
        
         

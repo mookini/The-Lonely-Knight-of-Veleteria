@@ -105,6 +105,7 @@
         let alive2 = true;
         let goblini1;
         let goblini2;
+        armor = sessionStorage.getItem("armor")
         stamina = 100
         health = sessionStorage.getItem("health")
         health = parseInt(health)
@@ -189,10 +190,15 @@
             //maincharacter
             image(left,movex,200,253,300)
             
-            //MAX STATS WILL GO UP WHEN BETTER EQUIPMENT IS BOUGHT
             maxstamina = 100
-            maxhealth = 100
-            //Setting maxhealth, will hcnage when I get better equipment
+            //Max Health marathon
+            if (armor=="true"){
+                maxhealth = 150
+            }
+            else{
+                maxhealth = 100
+            }
+
             if (maxhealth<health){
                 health = maxhealth
             }

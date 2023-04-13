@@ -50,16 +50,28 @@
     let once1 = 1;
     let once4 = 1;
     let check1 = 1
+    armor = sessionStorage.getItem("armor")
     let gobackl1 = sessionStorage.getItem("gobackl1")
     goback = true;
     firsttime = sessionStorage.getItem("firsttime")
     //NN
+    let gobackl11 = sessionStorage.getItem("gobackl11")
 
+    if(gobackl11=="true"){
+        gobackl11 = false
+        sessionStorage.setItem("gobackl11",gobackl11)
+        moveX1 = 1750
+        moveY1 = 540
+    }
     if(gobackl1=="true"){
+        gobackl1 = false
+        sessionStorage.setItem("gobackl1",gobackl1)
         moveX1 = 1500
         moveY1 = 80
+        gold = sessionStorage.getItem("gold")
+        
     }
-
+    
 
 
 
@@ -76,6 +88,7 @@
     }
     if(telebat1=="true"){
         telebat1 = false
+        sessionStorage.setItem("telebat1",telebat1)
         moveX1 = sessionStorage.getItem("moveX1")
         moveY1 = sessionStorage.getItem("moveY1")
         moveX1 = parseInt(moveX1)
@@ -140,7 +153,30 @@ function preload() {
             document.getElementById("display_text").innerHTML = ""
             document.getElementById("image_text").style.visibility = "visible"
             document.getElementById("common_text").style.visibility = "visible"
-            document.getElementById("common_text").innerHTML = "You Humaaaaan! <br> I gos gent you"
+            randomin=Math.floor(Math.random() * 5)
+            if(randomin ==1){
+                document.getElementById("common_text").innerHTML = "I Will kill you<br>slowly"
+            }
+            else if(randomin == 2){
+                document.getElementById("common_text").innerHTML = "I will use<br>your flesh as<br>my blanket"
+
+            }
+            else if(randomin == 3){
+                document.getElementById("common_text").innerHTML = "Your head<br>will be my<br>trophy"
+
+            }
+            else if(randomin == 4){
+                document.getElementById("common_text").innerHTML = "You are my<br>next meal"
+
+            }
+            else if(randomin == 5){
+                document.getElementById("common_text").innerHTML = "I can taste<br>your defeat<br>and it tastes<br>like sugar"
+
+            }
+            else{
+                document.getElementById("common_text").innerHTML = "I can taste<br>your defeat<br>and it tastes<br>like sugar"
+
+            }
             document.getElementById("image_pic").style.visibility = "visible"
             document.getElementById("image_pic").style.backgroundImage = "url('Goblin_head.png')"
             stuck = true
@@ -210,7 +246,13 @@ function preload() {
         document.getElementById("xpn").innerHTML = xp
         console.log(health)
         //makes sure that the health starts at 100
-        maxhealth = 100
+        if (armor=="true"){
+            maxhealth = 150
+        }
+        else{
+            maxhealth = 100
+        }
+       
 
         
        

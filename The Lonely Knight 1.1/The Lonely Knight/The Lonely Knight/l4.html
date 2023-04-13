@@ -45,7 +45,7 @@
     let stuck = false;
     musiconce = 1
     //Hit variabls
-    
+    armor = sessionStorage.getItem("armor")
     let once = 1;
     let once1 = 1;
     let once4 = 1;
@@ -180,8 +180,12 @@ function preload() {
         document.getElementById("xpn").innerHTML = xp
         console.log(health)
         //makes sure that the health starts at 100
-        maxhealth = 100
-
+        if (armor=="true"){
+            maxhealth = 150
+        }
+        else{
+            maxhealth = 100
+        }
         
        
         

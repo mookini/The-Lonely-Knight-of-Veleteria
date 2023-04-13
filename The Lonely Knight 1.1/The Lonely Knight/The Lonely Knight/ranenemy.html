@@ -92,6 +92,8 @@
         let movex = 1300
         let movexg = 300
         let movexm = 300
+        armor = sessionStorage.getItem("armor")
+        sandinc = sessionStorage.getItem("sandinc")
         let rani;
         musiconce = 1;
         stamina = 100
@@ -121,7 +123,10 @@
             goblin = false
             document.getElementById("enemyname").innerHTML = "Mushroom"
         }
-
+        //change map
+        if(sandinc =="true"){
+            document.getElementById("body3").style.backgroundImage = "url(sand.png)"
+        }
 
         function preload(){
             soundFormats('mp3',"ogg")
@@ -142,6 +147,7 @@
         }
         function draw(){
             clear()
+            console.log("Sandinc:",sandinc)
             if((musiconce == 1)&&(music_start===true)){
                     userStartAudio()
                     musiconce=2
@@ -172,9 +178,13 @@
             //maincharacter
             image(left,movex,200,253,300)
             
-            //MAX STATS WILL GO UP WHEN BETTER EQUIPMENT IS BOUGHT
             maxstamina = 100
-            maxhealth = 100
+            if (armor=="true"){
+                maxhealth = 150
+            }
+            else{
+                maxhealth = 100
+            }
             //Setting maxhealth, will hcnage when I get better equipment
             if (maxhealth<health){
                 health = maxhealth
