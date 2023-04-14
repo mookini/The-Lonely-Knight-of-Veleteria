@@ -126,6 +126,8 @@
         //change map
         if(sandinc =="true"){
             document.getElementById("body3").style.backgroundImage = "url(sand.png)"
+            sandinc = false
+            sessionStorage.setItem("sandinc",sandinc)
         }
 
         function preload(){

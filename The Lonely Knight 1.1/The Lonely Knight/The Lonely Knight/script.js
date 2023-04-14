@@ -36,6 +36,9 @@ let gotol5 = false;
 let gobacktol3 = false;
 let gobacktol4 =false;
 let gotol6 = false;
+let gotol7 = false;
+let gotol8 = false;
+let gotol9 = false;
 let gobacktoforest = false;
 //
 let firsttime;

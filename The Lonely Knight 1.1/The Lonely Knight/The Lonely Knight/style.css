@@ -87,7 +87,7 @@
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-    background-position: 0.02vh;
+    background-position-y:-10vw;
     background-repeat: no-repeat;
     
 }
@@ -105,6 +105,55 @@
     background-repeat: no-repeat;
     
 }
+#bodyl6{
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-image: url();
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-repeat: no-repeat;
+
+}
+#bodyl7{
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-image: url();
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-repeat: no-repeat;
+
+}
+#bodyl8{
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-image: url();
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-repeat: no-repeat;
+
+}
+#bodyl9{
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-image: url();
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-repeat: no-repeat;
+
+}
+
 
 #box_text{
     position: absolute;

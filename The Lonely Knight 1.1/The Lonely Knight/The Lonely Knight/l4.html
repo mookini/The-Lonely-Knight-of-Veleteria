@@ -40,8 +40,8 @@
 <script>
     let w = window.innerWidth;
     let h = window.innerHeight;
-    let moveX = 120
-    let moveY = 160
+    let moveX = 80
+    let moveY = 530
     let stuck = false;
     musiconce = 1
     //Hit variabls
@@ -110,7 +110,30 @@ function preload() {
             document.getElementById("display_text").innerHTML = ""
             document.getElementById("image_text").style.visibility = "visible"
             document.getElementById("common_text").style.visibility = "visible"
-            document.getElementById("common_text").innerHTML = "You Humaaaaan! <br> I gos gent you"
+            randomin=Math.floor(Math.random() * 5)
+            if(randomin ==1){
+                document.getElementById("common_text").innerHTML = "I Will kill you<br>slowly"
+            }
+            else if(randomin == 2){
+                document.getElementById("common_text").innerHTML = "I will use<br>your flesh as<br>my blanket"
+
+            }
+            else if(randomin == 3){
+                document.getElementById("common_text").innerHTML = "Your head<br>will be my<br>trophy"
+
+            }
+            else if(randomin == 4){
+                document.getElementById("common_text").innerHTML = "You are my<br>next meal"
+
+            }
+            else if(randomin == 5){
+                document.getElementById("common_text").innerHTML = "I can taste<br>your defeat<br>and it tastes<br>like sugar"
+
+            }
+            else{
+                document.getElementById("common_text").innerHTML = "I can taste<br>your defeat<br>and it tastes<br>like sugar"
+
+            }
             document.getElementById("image_pic").style.visibility = "visible"
             document.getElementById("image_pic").style.backgroundImage = "url('Goblin_head.png')"
             stuck = true
@@ -266,8 +289,11 @@ function preload() {
 
 
       //LOADED@#!
-
-    
+      
+      
+      gobacktol3=collideRectRect(moveX,moveY,50,50,0,580,50,100)
+      gotol5=collideRectRect(moveX,moveY,50,50,1850,280,70,100)
+      gotol6=collideRectRect(moveX,moveY,50,50,1100,0,100,50)
     if(gobacktol3===true){
         if(once==1){
             once+=1
@@ -279,6 +305,13 @@ function preload() {
             once+=1
             window.location.href = "l5.html"
         }
+    }
+    if(gotol6==true){
+        if(once==1){
+            once+=1
+            window.location.href = "l6.html"
+        }
+        
     }
     }
 }

@@ -122,12 +122,28 @@ function preload() {
         down = loadImage("down.png")
         levelm1.setVolume(1.0);
         levelm1.play()
-            
+        ///Loaded Trees
+        tree1 = loadImage("tree1.png")
+        tree2 = loadImage("tree2.png")
+        tree3 = loadImage("tree3.png")
+        tree4 = loadImage("tree4.png")
+        tree5 = loadImage("tree5.png")  
 
         
     }
     function draw(){
         clear()
+
+        ///Below are a list of trees(Only decoration)
+    ///Below are a list of trees(Only decoration)
+    image(tree1,500,600,70,130)
+    image(tree2,300,270,70,130)
+    image(tree3,800,100,70,130)
+    image(tree4,1100,360,70,130)
+    image(tree3,1500,700,80,130)
+    image(tree2,1700,300,80,130)
+    image(tree4,300,700,80,130)
+    image(tree1,1600,400,80,130)
     //Music
     if((musiconce == 1)&&(music_start===true)){
             userStartAudio()
