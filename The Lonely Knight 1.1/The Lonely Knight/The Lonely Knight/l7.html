@@ -40,8 +40,8 @@
         let w = window.innerWidth;
         let h = window.innerHeight;
         //Will change
-        let moveX = 500
-        let moveY = 500
+        let moveX = 940
+        let moveY = 620
         let stuck = false;
         musiconce = 1
         //Hit variabls
@@ -50,6 +50,7 @@
         let once1 = 1;
         let once4 = 1;
         let check1 = 1
+        gobackl7 = sessionStorage.getItem("gobackl7")
         //NN
         suattack = false;
         gold = sessionStorage.getItem("gold")
@@ -62,6 +63,13 @@
         moveX = parseInt(moveX)
         moveY = parseInt(moveY)
 
+    }
+    if(gobackl7=="true"){
+        moveX=1050
+        moveY=100
+
+        gobackl7 = false
+        sessionStorage.setItem("gobackl7",gobackl7)
     }
     
     ///////
@@ -284,6 +292,28 @@ function preload() {
         else{
             image(right,moveX,moveY,150,150)
         }
+
+       //LOADED@#!
+       
+
+       gobacktol4=collideRectRect(moveX,moveY,50,50,970,720,100,65)
+       gotol8=collideRectRect(moveX,moveY,50,50,1250,0,100,65)
+    
+       if(gobacktol4===true){
+        if(once==1){
+            once+=1
+            window.location.href = "l4.html"
+            gobackl44 = true
+            sessionStorage.setItem("gobackl44",gobackl44)
+        }
+    }
+    if(gotol8==true){
+        if(once==1){
+            once+=1
+            window.location.href = "l8.html"
+        }
+    }
+    
 }
 
 

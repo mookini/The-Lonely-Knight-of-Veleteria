@@ -40,8 +40,8 @@
         let w = window.innerWidth;
         let h = window.innerHeight;
         //Will change
-        let moveX = 500
-        let moveY = 500
+        let moveX = 100
+        let moveY = 150
         let stuck = false;
         musiconce = 1
         //Hit variabls
@@ -283,7 +283,23 @@ function preload() {
         }
         else{
             image(right,moveX,moveY,150,150)
+        }   
+        
+        //LOADED@#!
+
+        gobacktol8=collideRectRect(moveX,moveY,50,50,0,200,50,100)
+
+    
+        if(gobacktol8===true){
+            if(once==1){
+                once+=1
+                window.location.href = "l8.html"
+                gobackl8 = true
+                sessionStorage.setItem("gobackl8",gobackl8)
+            }
         }
+
+
 }
 
 

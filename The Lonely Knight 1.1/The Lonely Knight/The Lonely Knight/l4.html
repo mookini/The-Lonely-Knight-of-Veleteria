@@ -51,6 +51,8 @@
     let once4 = 1;
     let check1 = 1
     goback = true;
+    gobackl4 = sessionStorage.getItem("gobackl4")
+    gobackl44 = sessionStorage.getItem("gobackl44")
     //NN
     suattack = false;
     gold = sessionStorage.getItem("gold")
@@ -62,6 +64,24 @@
        moveY = sessionStorage.getItem("moveY")
        moveX = parseInt(moveX)
        moveY = parseInt(moveY)
+
+   }
+   //Going back from l5
+   if(gobackl4=="true"){
+        moveX=1750
+        moveY = 280
+
+        gobackl4 = false
+        sessionStorage.setItem("gobackl4",gobackl4)
+
+   }
+   //Going back from l7
+   if(gobackl44=="true"){
+    moveX=1000
+    moveY=100
+
+    gobackl44 = false
+    sessionStorage.setItem("gobackl44",gobackl44)
 
    }
     
@@ -98,6 +118,9 @@ function preload() {
         clear()
         noStroke()
         fill(color(0,0,0,0.2))
+
+
+
         if(fate ==1){
             suattack = true
         }
@@ -220,7 +243,7 @@ function preload() {
                 moveup = false
                 movedown = false
                 
-                setTimeout(() => { fate = Math.floor(Math.random() * (20 - 1 + 1)) + 1; }, 2000);
+                setTimeout(() => { fate = Math.floor(Math.random() * (70 - 1 + 1)) + 1; }, 2000);
 
             }
             
@@ -232,7 +255,7 @@ function preload() {
             moveleft = false
             moveup = false
             movedown = false
-            setTimeout(() => { fate = Math.floor(Math.random() * (20 - 1 + 1)) + 1; }, 2000);
+            setTimeout(() => { fate = Math.floor(Math.random() * (70 - 1 + 1)) + 1; }, 2000);
 
             
         }
@@ -245,7 +268,7 @@ function preload() {
             movedown = true
             moveup = false
             moveleft = false
-            setTimeout(() => { fate = Math.floor(Math.random() * (20 - 1 + 1)) + 1; }, 2000);
+            setTimeout(() => { fate = Math.floor(Math.random() * (70 - 1 + 1)) + 1; }, 2000);
 
 
         }
@@ -258,7 +281,7 @@ function preload() {
             moveup = true
             movedown = false
             moveleft = false
-            setTimeout(() => { fate = Math.floor(Math.random() * (20 - 1 + 1)) + 1; }, 2000);
+            setTimeout(() => { fate = Math.floor(Math.random() * (70 - 1 + 1)) + 1; }, 2000);
 
         }
     }
@@ -290,30 +313,34 @@ function preload() {
 
       //LOADED@#!
       
-      
       gobacktol3=collideRectRect(moveX,moveY,50,50,0,580,50,100)
       gotol5=collideRectRect(moveX,moveY,50,50,1850,280,70,100)
-      gotol6=collideRectRect(moveX,moveY,50,50,1100,0,100,50)
+      gotol7=collideRectRect(moveX,moveY,50,50,1100,25,100,50)
+
+
     if(gobacktol3===true){
         if(once==1){
             once+=1
+            gobackl3 = true
+            sessionStorage.setItem("gobackl3",gobackl3)
             window.location.href = "l3.html"
         }
-
+    }
     if(gotol5===true){
         if(once==1){
             once+=1
+
             window.location.href = "l5.html"
         }
     }
-    if(gotol6==true){
+    if(gotol7===true){
         if(once==1){
             once+=1
-            window.location.href = "l6.html"
+            window.location.href = "l7.html"
         }
         
     }
-    }
+    
 }
 
 

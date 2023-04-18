@@ -40,8 +40,8 @@
 <script>
     let w = window.innerWidth;
     let h = window.innerHeight;
-    let moveX = 120
-    let moveY = 160
+    let moveX = 150
+    let moveY = 270
     let stuck = false;
     musiconce = 1
     //Hit variabls
@@ -51,6 +51,7 @@
     let once4 = 1;
     let check1 = 1
     goback = true;
+    gobackl5 = sessionStorage.getItem("gobackl5")
     //NN
     suattack = false;
     armor = sessionStorage.getItem("armor")
@@ -63,6 +64,14 @@
        moveY = sessionStorage.getItem("moveY")
        moveX = parseInt(moveX)
        moveY = parseInt(moveY)
+
+   }
+   if(gobackl5=="true"){
+        moveX=1700
+        moveY=100
+
+        gobackl5 = false
+        sessionStorage.setItem("gobackl5",gobackl5)
 
    }
     
@@ -98,9 +107,11 @@ function preload() {
             }
         noStroke()
         fill(color(0,0,0,0.2))
-        if(fate ==1){
-            suattack = true
-        }
+
+        ///////////////////
+        //if(fate ==1){
+        //    suattack = true
+        //}
 
         //Surprise Attack function
 
@@ -288,23 +299,28 @@ function preload() {
             image(right,moveX,moveY,150,150)
         }
 
+    console.log(moveX+","+moveY)
+    //LOADED@#!
+    
 
-      //LOADED@#!
-
+    gobacktol4=collideRectRect(moveX,moveY,50,50,30,275,50,100)
+    gotol6=collideRectRect(moveX,moveY,150,150,1880,255,100,100)
     
     if(gobacktol4===true){
         if(once==1){
             once+=1
             window.location.href = "l4.html"
+            gobackl4=true
+            sessionStorage.setItem("gobackl4",gobackl4)
         }
-
-    if(gotol6==true){
+    }
+    if(gotol6===true){
         if(once==1){
             once+=1
-            ///window.location.href = "l6.html"   Not yet created
+            window.location.href = "l6.html"
         }
     }
-    }
+    
 }
 
 

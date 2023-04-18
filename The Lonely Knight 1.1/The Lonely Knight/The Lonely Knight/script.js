@@ -28,17 +28,36 @@ let enemy2;
 //tele
 let place;
 let telebat;
+let gobackl1;
+let gobackl11;
 let gotol2 = false;
 let gotol3 = false;
-let gobacktol1 = false;
 let gotol4 = false;
 let gotol5 = false;
-let gobacktol3 = false;
-let gobacktol4 =false;
 let gotol6 = false;
 let gotol7 = false;
 let gotol8 = false;
 let gotol9 = false;
+let gobacktol1 = false;
+let gobacktol2 = false;
+let gobacktol3 = false;
+let gobacktol4 = false;
+let gobacktol5 = false;
+let gobacktol6 = false;
+let gobacktol7 = false;
+let gobacktol8 = false;
+let gobacktol9 = false;
+let gobackl8;
+let gobackl7;
+let gobackl6;
+let gobackl5;
+let gobackl4;
+let gobackl44;
+
+
+
+
+//Uneeded
 let gobacktoforest = false;
 //
 let firsttime;

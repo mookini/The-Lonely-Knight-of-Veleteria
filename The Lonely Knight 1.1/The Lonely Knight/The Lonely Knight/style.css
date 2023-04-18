@@ -96,12 +96,12 @@
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-image: url(sand.png);
+    background-image: url(l5.png);
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-    background-position: 0.02vh;
+    background-position-y:-13vw;
     background-repeat: no-repeat;
     
 }
@@ -109,7 +109,7 @@
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-image: url();
+    background-image: url(l6.png);
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -121,7 +121,7 @@
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-image: url();
+    background-image: url(l7.png);
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -133,11 +133,12 @@
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-image: url();
+    background-image: url(l8.png);
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+    background-position-y: -5vw;
     background-repeat: no-repeat;
 
 }
@@ -145,11 +146,12 @@
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-image: url();
+    background-image: url(l9.png);
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+    background-position-y: -10vw;
     background-repeat: no-repeat;
 
 }

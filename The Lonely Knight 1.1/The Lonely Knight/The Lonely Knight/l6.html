@@ -40,8 +40,8 @@
         let w = window.innerWidth;
         let h = window.innerHeight;
         //Will change
-        let moveX = 500
-        let moveY = 500
+        let moveX = 100
+        let moveY = 400
         let stuck = false;
         musiconce = 1
         //Hit variabls
@@ -65,6 +65,10 @@
     }
     
     ///////
+    
+    ///BOSS LEVEL 1 and only 1
+
+    ///
 function preload() {
     soundFormats('mp3',"ogg")
     levelm1 = loadSound('levelm1.mp3')
@@ -97,9 +101,10 @@ function preload() {
             }
         noStroke()
         fill(color(0,0,0,0.2))
-        if(fate ==1){
-            suattack = true
-        }
+        //Their will be no surprise attack in this level
+        //if(fate ==1){
+        //    suattack = true
+       // }
 
         //Surprise Attack function
 
@@ -284,6 +289,23 @@ function preload() {
         else{
             image(right,moveX,moveY,150,150)
         }
+
+           //LOADED@#!
+            
+    gobacktol5=collideRectRect(moveX,moveY,50,50,0,430,50,100)
+
+    
+    if(gobacktol5===true){
+        if(once==1){
+            once+=1
+            window.location.href = "l5.html"
+            gobackl5 = true
+            sessionStorage.setItem("gobackl5",gobackl5)
+        }
+    }
+    
+
+    
 }
 
 

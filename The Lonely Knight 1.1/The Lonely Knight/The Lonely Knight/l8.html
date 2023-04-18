@@ -50,6 +50,7 @@
         let once1 = 1;
         let once4 = 1;
         let check1 = 1
+        gobackl8 = sessionStorage.getItem("gobackl8")
         //NN
         suattack = false;
         gold = sessionStorage.getItem("gold")
@@ -63,6 +64,13 @@
         moveY = parseInt(moveY)
 
     }
+    if(gobackl8=="true"){
+        moveX = 1750
+        moveY = 120
+        gobackl8 = false
+        sessionStorage.setItem("gobackl8",gobackl8)
+    }
+    
     
     ///////
 function preload() {
@@ -97,6 +105,8 @@ function preload() {
             }
         noStroke()
         fill(color(0,0,0,0.2))
+
+
         if(fate ==1){
             suattack = true
         }
@@ -284,6 +294,29 @@ function preload() {
         else{
             image(right,moveX,moveY,150,150)
         }
+           //LOADED@#!
+        
+              
+
+        gobacktol7=collideRectRect(moveX,moveY,50,50,520,630,100,100)
+        gotol9=collideRectRect(moveX,moveY,50,50,1860,180,50,100) 
+    
+        if(gobacktol7===true){
+            console.log("worked")
+            if(once==1){
+                once+=1
+                gobackl7 = true
+                sessionStorage.setItem("gobackl7",gobackl7)
+                window.location.href = "l7.html"
+            }
+        }
+        if(gotol9==true){
+            if(once==1){
+                once+=1
+                window.location.href = "l9.html"
+            }
+        }
+        
 }
 
 
