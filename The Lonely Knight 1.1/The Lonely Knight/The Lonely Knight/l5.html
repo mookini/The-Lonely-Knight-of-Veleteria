@@ -58,6 +58,13 @@
     let once11 =1;
     let check1 = 1
     let countcheck = -1;
+    let countcheck1=-1;
+    let countcheck2=-1;
+    let countcheck3=-1;
+    let endchat1=false;
+    let endchat2=false;
+    let endchat3=false;
+    let endchat4=false;
     let securitygaurd = false
     let merchant = false
     let blacksmith = false
@@ -95,6 +102,7 @@
         sessionStorage.setItem("gobackl5",gobackl5)
 
    }
+
     
     ///////Place to buy goods. Potions and Enchanted armor. use security to cuation l6
 function preload() {
@@ -336,7 +344,7 @@ function preload() {
         merchant = collideRectRect(moveX,moveY,100,100,1100,500,120,100)
         blacksmith = collideRectRect(moveX,moveY,100,100,1000,250,110,100)
 
-    if(priest===true){
+    if((priest===true)&&(endchat1===false)){
         document.getElementById("display_text").innerHTML = "Press 'c' to talk to blind priest(?)"
 
         if ((keyCode === 67)||(againt === true)){
@@ -408,14 +416,17 @@ function preload() {
                     document.getElementById("image_pic").style.visibility = "hidden"
                     stuck = false
                     againt= false
+                    endchat1 = true
                     
 
                   
                 }
         }
     }
+    else{
+    }
 
-    if(merchant===true){
+    if((merchant===true)&&(endchat2===false)){
         document.getElementById("display_text").innerHTML = "Press 'c' to buy a health potion for 20 gold"
 
         if ((keyCode === 67)||(againt === true)){
@@ -439,39 +450,48 @@ function preload() {
             }
 
             onkeypress = function(){
-                if((noheal===true)||(noheal===false)){
-                    countcheck += 1
-                }
+                
+                countcheck1 += 1
+                
             
                 
             }
-            if (countcheck==0){
+            if (countcheck1==0){
                     document.getElementById("common_text").innerHTML = "This wont work"
-                    countcheck = 1
+                    countcheck1 = 1
                 
                 }
-            else if ((countcheck == 1)&&(noheal===true)){
+            else if ((countcheck1 == 1)&&(noheal===true)){
+                    document.getElementById("image_text").style.visibility = "visible"
+                    document.getElementById("common_text").style.visibility = "visible"
+                    document.getElementById("image_pic").style.visibility = "visible"
                     document.getElementById("common_text").innerHTML = "You dont have<br>enought money"
                     document.getElementById("image_pic").style.transform = "scaleX(1)"
                     document.getElementById("image_pic").style.backgroundImage = "url('mhead.png')"
+                    document.getElementById("display_text").innerHTML = ""
                     
                 }
-            else if ((countcheck == 2)&&(noheal===true)){
+            else if ((countcheck1 == 2)&&(noheal===true)){
                     document.getElementById("image_pic").style.transform = ""
                     document.getElementById("common_text").innerHTML = "I apologize"
                     document.getElementById("image_pic").style.visibility = "visible"
                     document.getElementById("image_pic").style.transform = "scaleX(1)"
                     document.getElementById("image_pic").style.backgroundImage = "url('head.png')"
                 }
-            else if((countcheck == 3)&&(noheal===true)){
+            else if((countcheck1 == 3)&&(noheal===true)){
                     document.getElementById("image_text").style.visibility = "hidden"
                     document.getElementById("common_text").style.visibility = "hidden"
                     document.getElementById("image_pic").style.visibility = "hidden"
                     stuck = false
                     againt= false
+                    endchat2=true
+
 
             }
-            else if((countcheck == 1)&&(noheal===false)){
+            else if((countcheck1 == 1)&&(noheal===false)){
+                    document.getElementById("image_text").style.visibility = "visible"
+                    document.getElementById("common_text").style.visibility = "visible"
+                    document.getElementById("image_pic").style.visibility = "visible"
                     document.getElementById("image_pic").style.transform = ""
                     document.getElementById("common_text").innerHTML = "Just follow the<br>directions"
                     document.getElementById("image_pic").style.visibility = "visible"
@@ -480,7 +500,7 @@ function preload() {
 
             }
 
-            else if((countcheck == 2)&&(noheal===false)){
+            else if((countcheck1 == 2)&&(noheal===false)){
                     document.getElementById("image_pic").style.transform = ""
                     document.getElementById("common_text").innerHTML = "good day"
                     document.getElementById("image_pic").style.visibility = "visible"
@@ -489,13 +509,13 @@ function preload() {
 
             }
             
-            else if((countcheck == 3)&&(noheal===false)){
+            else if((countcheck1 == 3)&&(noheal===false)){
                     document.getElementById("image_text").style.visibility = "hidden"
                     document.getElementById("common_text").style.visibility = "hidden"
                     document.getElementById("image_pic").style.visibility = "hidden"
                     stuck = false
                     againt= false
-                    
+                    endchat2=true
 
                   
                 }
@@ -503,12 +523,11 @@ function preload() {
     }
     else{
         once6=1
-        noheal=NaN
     }
     
     
 
-    if(blacksmith===true){
+    if((blacksmith===true)&&(endchat3===false)){
         document.getElementById("display_text").innerHTML = "Press 'c' to buy Mithril Armor for 120 gold"
         if ((keyCode === 67)||(againt === true)){
             againt = true
@@ -533,38 +552,48 @@ function preload() {
 
             onkeypress = function(){
                 if((noheal===true)||(noheal===false)){
-                    countcheck += 1
+                    countcheck2 += 1
                 }
             
                 
             }
-            if (countcheck==0){
+            if (countcheck2==0){
                     document.getElementById("common_text").innerHTML = "This wont work"
-                    countcheck = 1
+                    countcheck2 = 1
                 
                 }
-            else if ((countcheck == 1)&&(noheal===true)){
+            else if ((countcheck2 == 1)&&(noheal===true)){
+                    document.getElementById("display_text").innerHTML = ""
+                    document.getElementById("image_text").style.visibility = "visible"
+                    document.getElementById("common_text").style.visibility = "visible"
+                    document.getElementById("image_pic").style.visibility = "visible"
                     document.getElementById("common_text").innerHTML = "You dont have<br>enought money"
                     document.getElementById("image_pic").style.transform = "scaleX(1)"
                     document.getElementById("image_pic").style.backgroundImage = "url('mhead.png')"
                     
                 }
-            else if ((countcheck == 2)&&(noheal===true)){
+            else if ((countcheck2 == 2)&&(noheal===true)){
                     document.getElementById("image_pic").style.transform = ""
                     document.getElementById("common_text").innerHTML = "I apologize"
                     document.getElementById("image_pic").style.visibility = "visible"
                     document.getElementById("image_pic").style.transform = "scaleX(1)"
                     document.getElementById("image_pic").style.backgroundImage = "url('head.png')"
                 }
-            else if((countcheck == 3)&&(noheal===true)){
+            else if((countcheck2 == 3)&&(noheal===true)){
                     document.getElementById("image_text").style.visibility = "hidden"
                     document.getElementById("common_text").style.visibility = "hidden"
                     document.getElementById("image_pic").style.visibility = "hidden"
                     stuck = false
                     againt= false
+                    endchat3=true
+
 
             }
-            if((countcheck == 1)&&(noheal===false)){
+            if((countcheck2 == 1)&&(noheal===false)){
+                    document.getElementById("display_text").innerHTML = ""
+                    document.getElementById("image_text").style.visibility = "visible"
+                    document.getElementById("common_text").style.visibility = "visible"
+                    document.getElementById("image_pic").style.visibility = "visible"
                     document.getElementById("image_pic").style.transform = ""
                     document.getElementById("common_text").innerHTML = "best armor<br>I have ever<br>made"
                     document.getElementById("image_pic").style.visibility = "visible"
@@ -573,7 +602,7 @@ function preload() {
 
             }
 
-            else if((countcheck == 2)&&(noheal===false)){
+            else if((countcheck2 == 2)&&(noheal===false)){
                     document.getElementById("image_pic").style.transform = ""
                     document.getElementById("common_text").innerHTML = "good day"
                     document.getElementById("image_pic").style.visibility = "visible"
@@ -582,13 +611,13 @@ function preload() {
 
             }
             
-            else if((countcheck == 3)&&(noheal===false)){
+            else if((countcheck2 == 3)&&(noheal===false)){
                     document.getElementById("image_text").style.visibility = "hidden"
                     document.getElementById("common_text").style.visibility = "hidden"
                     document.getElementById("image_pic").style.visibility = "hidden"
                     stuck = false
                     againt= false
-                    
+                    endchat3=true
 
                   
                 }
@@ -597,11 +626,10 @@ function preload() {
     }
     else{
         once7=1
-        noheal=NaN
 
     }
 
-    if(securitygaurd===true){
+    if((securitygaurd===true)&&(endchat4===false)){
         document.getElementById("display_text").innerHTML = "Press 'c' to talk to imperial gaurd(!)"
 
         if ((keyCode === 67)||(againt === true)){
@@ -614,34 +642,31 @@ function preload() {
             document.getElementById("image_pic").style.transform = "scaleX(1)"
             document.getElementById("common_text").innerHTML = "it is a<br>fine day<br>today"
             stuck = true
-            if(once9==1){
-                countcheck = 0
-                once9=2
-            }
+        
             onkeypress = function(){
-                countcheck += 1
+                countcheck3 += 1
             
                 
             }
-            if (countcheck==0){
+            if (countcheck3==0){
                     document.getElementById("common_text").innerHTML = "This wont work"
                     countcheck = 1
                 
                 }
-            else if (countcheck == 1){
+            else if (countcheck3 == 1){
                     document.getElementById("common_text").innerHTML = "Yes it is<br>As a word<br> of caution..."
                     document.getElementById("image_pic").style.transform = "scaleX(1)"
-                    document.getElementById("image_pic").style.backgroundImage = "url('ss.png')"
+                    document.getElementById("image_pic").style.backgroundImage = "url('sshead.png')"
                     
                 }
-            else if (countcheck == 2){
+            else if (countcheck3 == 2){
                     document.getElementById("image_pic").style.transform = ""
                     document.getElementById("common_text").innerHTML = "There are<br>reports of<br> a big mushroom<br>ahead<br> the fungus makes<br>the sand black"
                     document.getElementById("image_pic").style.visibility = "visible"
                     document.getElementById("image_pic").style.transform = "scaleX(1)"
-                    document.getElementById("image_pic").style.backgroundImage = "url('ss.png')"
+                    document.getElementById("image_pic").style.backgroundImage = "url('sshead.png')"
                 }
-            else if(countcheck ==3){
+            else if(countcheck3 ==3){
                     document.getElementById("image_pic").style.transform = ""
                     document.getElementById("common_text").innerHTML = "thank you for<br>the warning"
                     document.getElementById("image_pic").style.visibility = "visible"
@@ -649,13 +674,13 @@ function preload() {
                     document.getElementById("image_pic").style.backgroundImage = "url('head.png')"
                   
             }
-            else if (countcheck == 4){
+            else if (countcheck3 == 4){
                     document.getElementById("image_text").style.visibility = "hidden"
                     document.getElementById("common_text").style.visibility = "hidden"
                     document.getElementById("image_pic").style.visibility = "hidden"
                     stuck = false
                     againt= false
-                    once9=1
+                    endchat4 = true
 
                   
                 }
@@ -663,8 +688,8 @@ function preload() {
 
     }
     else{
-        
 
+        
     }
     
 

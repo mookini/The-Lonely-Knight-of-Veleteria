@@ -54,6 +54,8 @@
         let showt = false;
         let poorman=false;
         let countcheck = -1;
+        let endchat1 = false;
+        let againt = false;
         gobackl8 = sessionStorage.getItem("gobackl8")
         //NN
         suattack = false;
@@ -76,7 +78,7 @@
         gobackl8 = false
         sessionStorage.setItem("gobackl8",gobackl8)
     }
-    
+
     
     ///////A poor old swordsman asks for money. BY giving money the player does not get anything.
 function preload() {
@@ -90,6 +92,7 @@ function preload() {
         left = loadImage("left.png")
         up = loadImage("up.png")
         down = loadImage("down.png")
+        poormani=loadImage("poorknight.png")
         levelm1.setVolume(1.0);
         levelm1.play()
         
@@ -302,8 +305,10 @@ function preload() {
         }
            //LOADED@#!
 
+           image(poormani,1600,70,100,90)
+        poorman=collideRectRect(moveX,moveY,100,100,1600,70,100,90)
 
-        if(poorman===true){
+        if((poorman===true)&&(endchat1===false)){
         document.getElementById("display_text").innerHTML = "Press 'c' to talk to begger($)"
 
         if ((keyCode === 67)||(againt === true)){
@@ -312,7 +317,7 @@ function preload() {
             document.getElementById("image_text").style.visibility = "visible"
             document.getElementById("common_text").style.visibility = "visible"
             document.getElementById("image_pic").style.visibility = "visible"
-            document.getElementById("image_pic").style.backgroundImage = "url('head.png')"
+            document.getElementById("image_pic").style.backgroundImage = "url('pnhead.png')"
             document.getElementById("image_pic").style.transform = "scaleX(1)"
             document.getElementById("common_text").innerHTML = "Oyy!<br>Mister"
             stuck = true
@@ -337,14 +342,14 @@ function preload() {
                     document.getElementById("common_text").innerHTML = "Could you spare<br>some coin boy?"
                     document.getElementById("image_pic").style.visibility = "visible"
                     document.getElementById("image_pic").style.transform = "scaleX(1)"
-                    document.getElementById("image_pic").style.backgroundImage = "url('head.png')"
+                    document.getElementById("image_pic").style.backgroundImage = "url('pnhead.png')"
                 }
             else if(countcheck ==3){
                     document.getElementById("image_pic").style.transform = ""
                     document.getElementById("common_text").innerHTML = "I once was a<br>mighty swordsman like<br>yourselve but like<br>all, I grew old<br>and frail"
                     document.getElementById("image_pic").style.visibility = "visible"
                     document.getElementById("image_pic").style.transform = "scaleX(1)"
-                    document.getElementById("image_pic").style.backgroundImage = "url('head.png')"
+                    document.getElementById("image_pic").style.backgroundImage = "url('pnhead.png')"
                   
             }
             else if(countcheck ==4){
@@ -360,7 +365,7 @@ function preload() {
                     document.getElementById("image_pic").style.visibility = "visible"
                     document.getElementById("common_text").innerHTML = "No,not at all<br>at least 40 gold"
                     document.getElementById("image_pic").style.transform = "scaleX(1)"
-                    document.getElementById("image_pic").style.backgroundImage = "url('head.png')"
+                    document.getElementById("image_pic").style.backgroundImage = "url('pnhead.png')"
                   
             }
             else if((countcheck ==6)&&(gold>=40)){
@@ -380,13 +385,13 @@ function preload() {
                     document.getElementById("image_pic").style.visibility = "visible"
                     document.getElementById("common_text").innerHTML = "Thank you<br>God bless you"
                     document.getElementById("image_pic").style.transform = "scaleX(1)"
-                    document.getElementById("image_pic").style.backgroundImage = "url('head.png')"
+                    document.getElementById("image_pic").style.backgroundImage = "url('pnhead.png')"
                   
             }
             else if((countcheck ==6)&&(gold<40)){
                     document.getElementById("image_pic").style.transform = ""
                     document.getElementById("image_pic").style.visibility = "visible"
-                    document.getElementById("common_text").innerHTML = "I dont think<br>you should<br>decide.<br>Plus I don't<br>have 40 gold"
+                    document.getElementById("common_text").innerHTML = "I dont think<br>you should<br>decide."
                     document.getElementById("image_pic").style.transform = "scaleX(1)"
                     document.getElementById("image_pic").style.backgroundImage = "url('head.png')" 
                   
@@ -396,7 +401,7 @@ function preload() {
                     document.getElementById("image_pic").style.visibility = "visible"
                     document.getElementById("common_text").innerHTML = "Then Go<br>You bloody loser"
                     document.getElementById("image_pic").style.transform = "scaleX(1)"
-                    document.getElementById("image_pic").style.backgroundImage = "url('head.png')"
+                    document.getElementById("image_pic").style.backgroundImage = "url('pnhead.png')"
                   
             }
             
@@ -406,7 +411,7 @@ function preload() {
                     document.getElementById("image_pic").style.visibility = "hidden"
                     stuck = false
                     againt= false
-                    
+                    endchat1=true
 
                   
                 }
