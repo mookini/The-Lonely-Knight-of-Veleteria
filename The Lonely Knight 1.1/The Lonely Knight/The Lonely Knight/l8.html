@@ -50,6 +50,10 @@
         let once1 = 1;
         let once4 = 1;
         let check1 = 1
+        let poormani;
+        let showt = false;
+        let poorman=false;
+        let countcheck = -1;
         gobackl8 = sessionStorage.getItem("gobackl8")
         //NN
         suattack = false;
@@ -58,6 +62,8 @@
         health = sessionStorage.getItem("health")
         telebat = sessionStorage.getItem("telebat")
     if(telebat=="true"){
+        telebat = false
+        sessionStorage.setItem("telebat",telebat)
         moveX = sessionStorage.getItem("moveX")
         moveY = sessionStorage.getItem("moveY")
         moveX = parseInt(moveX)
@@ -72,7 +78,7 @@
     }
     
     
-    ///////
+    ///////A poor old swordsman asks for money. BY giving money the player does not get anything.
 function preload() {
     soundFormats('mp3',"ogg")
     levelm1 = loadSound('levelm1.mp3')
@@ -159,7 +165,7 @@ function preload() {
                     once4 = 2
                     if (once1 == 1){
                         once1 = 2
-                        place = "l5.html"
+                        place = "l8.html"
                         telebat = true
                         goblin = true
                         sessionStorage.setItem("levelup",levelup)
@@ -295,6 +301,124 @@ function preload() {
             image(right,moveX,moveY,150,150)
         }
            //LOADED@#!
+
+
+        if(poorman===true){
+        document.getElementById("display_text").innerHTML = "Press 'c' to talk to begger($)"
+
+        if ((keyCode === 67)||(againt === true)){
+            againt = true
+            document.getElementById("display_text").innerHTML = ""
+            document.getElementById("image_text").style.visibility = "visible"
+            document.getElementById("common_text").style.visibility = "visible"
+            document.getElementById("image_pic").style.visibility = "visible"
+            document.getElementById("image_pic").style.backgroundImage = "url('head.png')"
+            document.getElementById("image_pic").style.transform = "scaleX(1)"
+            document.getElementById("common_text").innerHTML = "Oyy!<br>Mister"
+            stuck = true
+            onkeypress = function(){
+                countcheck += 1
+            
+                
+            }
+            if (countcheck==0){
+                    document.getElementById("common_text").innerHTML = "This wont work"
+                    countcheck = 1
+                
+                }
+            else if (countcheck == 1){
+                    document.getElementById("common_text").innerHTML = "Yes?"
+                    document.getElementById("image_pic").style.transform = "scaleX(1)"
+                    document.getElementById("image_pic").style.backgroundImage = "url('head.png')"
+                    
+                }
+            else if (countcheck == 2){
+                    document.getElementById("image_pic").style.transform = ""
+                    document.getElementById("common_text").innerHTML = "Could you spare<br>some coin boy?"
+                    document.getElementById("image_pic").style.visibility = "visible"
+                    document.getElementById("image_pic").style.transform = "scaleX(1)"
+                    document.getElementById("image_pic").style.backgroundImage = "url('head.png')"
+                }
+            else if(countcheck ==3){
+                    document.getElementById("image_pic").style.transform = ""
+                    document.getElementById("common_text").innerHTML = "I once was a<br>mighty swordsman like<br>yourselve but like<br>all, I grew old<br>and frail"
+                    document.getElementById("image_pic").style.visibility = "visible"
+                    document.getElementById("image_pic").style.transform = "scaleX(1)"
+                    document.getElementById("image_pic").style.backgroundImage = "url('head.png')"
+                  
+            }
+            else if(countcheck ==4){
+                    document.getElementById("image_pic").style.transform = ""
+                    document.getElementById("common_text").innerHTML = "Would 10 gold suffice?"
+                    document.getElementById("image_pic").style.visibility = "visible"
+                    document.getElementById("image_pic").style.transform = "scaleX(1)"
+                    document.getElementById("image_pic").style.backgroundImage = "url('head.png')"
+                  
+            }
+            else if(countcheck ==5){
+                    document.getElementById("image_pic").style.transform = ""
+                    document.getElementById("image_pic").style.visibility = "visible"
+                    document.getElementById("common_text").innerHTML = "No,not at all<br>at least 40 gold"
+                    document.getElementById("image_pic").style.transform = "scaleX(1)"
+                    document.getElementById("image_pic").style.backgroundImage = "url('head.png')"
+                  
+            }
+            else if((countcheck ==6)&&(gold>=40)){
+                    document.getElementById("image_pic").style.transform = ""
+                    document.getElementById("image_pic").style.visibility = "visible"
+                    document.getElementById("common_text").innerHTML = "I will probably regret this<br>here is 40 gold<br>as requested"
+                    document.getElementById("image_pic").style.transform = "scaleX(1)"
+                    document.getElementById("image_pic").style.backgroundImage = "url('head.png')"
+                    gold-=40
+                    sessionStorage.setItem("gold",gold)
+                    showt = true
+                  
+            }
+            else if((countcheck ==7)&&(showt===true)){
+                    
+                    document.getElementById("image_pic").style.transform = ""
+                    document.getElementById("image_pic").style.visibility = "visible"
+                    document.getElementById("common_text").innerHTML = "Thank you<br>God bless you"
+                    document.getElementById("image_pic").style.transform = "scaleX(1)"
+                    document.getElementById("image_pic").style.backgroundImage = "url('head.png')"
+                  
+            }
+            else if((countcheck ==6)&&(gold<40)){
+                    document.getElementById("image_pic").style.transform = ""
+                    document.getElementById("image_pic").style.visibility = "visible"
+                    document.getElementById("common_text").innerHTML = "I dont think<br>you should<br>decide.<br>Plus I don't<br>have 40 gold"
+                    document.getElementById("image_pic").style.transform = "scaleX(1)"
+                    document.getElementById("image_pic").style.backgroundImage = "url('head.png')" 
+                  
+            }
+            else if((countcheck ==7)&&(gold<40)){
+                    document.getElementById("image_pic").style.transform = ""
+                    document.getElementById("image_pic").style.visibility = "visible"
+                    document.getElementById("common_text").innerHTML = "Then Go<br>You bloody loser"
+                    document.getElementById("image_pic").style.transform = "scaleX(1)"
+                    document.getElementById("image_pic").style.backgroundImage = "url('head.png')"
+                  
+            }
+            
+            else if (countcheck == 8){
+                    document.getElementById("image_text").style.visibility = "hidden"
+                    document.getElementById("common_text").style.visibility = "hidden"
+                    document.getElementById("image_pic").style.visibility = "hidden"
+                    stuck = false
+                    againt= false
+                    
+
+                  
+                }
+        }
+
+    }
+    else{
+        document.getElementById("display_text").innerHTML =""
+
+
+    
+        }
         
               
 

@@ -48,9 +48,11 @@
     let once = 1;
     let once1 = 1;
     let once4 = 1;
+    let once5 = 1
     let check1 = 1
+    let countcheck = 0
     goback = true;
-    
+    let securityi;
     gobackl3 = sessionStorage.getItem("gobackl3")
     armor = sessionStorage.getItem("armor")
     //NN
@@ -60,6 +62,8 @@
     health = sessionStorage.getItem("health")
     telebat = sessionStorage.getItem("telebat")
    if(telebat=="true"){
+        telebat = false
+        sessionStorage.setItem("telebat",telebat)
        moveX = sessionStorage.getItem("moveX")
        moveY = sessionStorage.getItem("moveY")
        moveX = parseInt(moveX)
@@ -84,7 +88,7 @@ function preload() {
         down = loadImage("down.png")
         levelm1.setVolume(1.0);
         levelm1.play()
-            
+        securityi = loadImage("ss.png")
 
         
     }
@@ -297,10 +301,85 @@ function preload() {
 
     //LOADED@#!
     noStroke()
-    fill(color(0,0,0,0.2))
     
-    rect(0,500,50,100)
-    rect(1850,550,50,100)
+
+    image(securityi,200,120,150,100)
+    securitygaurd2 = collideRectRect(moveX,moveY,100,100,200,120,150,100)
+    
+   if((securitygaurd2 === true)&&(once5==1)){
+        if(keyCode == 67){
+            once5=2
+            document.getElementById("display_text").innerHTML = ""
+            stuck = true
+            document.getElementById("image_text").style.visibility = "visible"
+            document.getElementById("common_text").style.visibility = "visible"
+            document.getElementById("image_pic").style.visibility = "visible"
+            document.getElementById("image_pic").style.backgroundImage = "url('head.png')"
+            document.getElementById("image_pic").style.transform = "scaleX(1)"
+            document.getElementById("common_text").innerHTML = "Good Evening"
+            countcheck = 0
+
+        }
+        onkeypress = function(){
+                countcheck += 1  
+               
+            }
+
+            if(countcheck ==1){
+                        document.getElementById("display_text").innerHTML = ""
+                        document.getElementById("image_text").style.visibility = "visible"
+                        document.getElementById("common_text").style.visibility = "visible"
+                        document.getElementById("image_pic").style.visibility = "visible"
+                        document.getElementById("image_pic").style.backgroundImage = "url('sshead.png')"
+                        document.getElementById("image_pic").style.transform = "scaleX(-1)"
+                        document.getElementById("common_text").innerHTML = "Halt!"
+                        stuck = true
+
+                    }
+                    else if(countcheck ==2){
+                        document.getElementById("image_pic").style.backgroundImage = "url('head.png')"
+                        document.getElementById("image_pic").style.transform = "scaleX(1)"
+                        document.getElementById("")
+                        document.getElementById("common_text").innerHTML = "What is the issue?"
+                    }
+                    else if(countcheck ==3){
+                        stuck = true
+                        document.getElementById("image_pic").style.backgroundImage = "url('sshead.png')"
+                        document.getElementById("image_pic").style.transform = "scaleX(-1)"
+                        document.getElementById("common_text").innerHTML = "Be careful <br>Their are many<br>stray goblins<br>since we destroyed<br>their camp"
+                    }
+                    else if(countcheck ==4){
+                        stuck = true
+                        document.getElementById("image_pic").style.backgroundImage = "url('head.png')"
+                        document.getElementById("image_pic").style.transform = "scaleX(1)"
+                        document.getElementById("common_text").innerHTML = "Thank you<br>by for the warning"
+
+
+                    }
+                    else if(countcheck ==5){
+                        stuck = true
+                        document.getElementById("image_pic").style.backgroundImage = "url('sshead.png')"
+                        document.getElementById("image_pic").style.transform = "scaleX(-1)"
+                        document.getElementById("common_text").innerHTML = "Be safe<br>citizen"
+
+                    }
+                    else{
+                        
+                        stuck = false
+                        document.getElementById("image_text").style.visibility = "hidden"
+                        document.getElementById("common_text").style.visibility = "hidden"
+                        document.getElementById("image_pic").style.visibility = "hidden"
+                    }            
+   }
+   else{
+        document.getElementById("display_text").innerHTML = ""
+        
+
+
+   }
+
+
+
     gobacktol1=collideRectRect(moveX,moveY,40,40,0,500,50,100)
     gotol4=collideRectRect(moveX,moveY,40,40,1850,550,50,100)
     if(gobacktol1===true){

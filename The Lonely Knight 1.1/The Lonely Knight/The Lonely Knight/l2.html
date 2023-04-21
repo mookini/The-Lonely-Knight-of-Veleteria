@@ -331,7 +331,84 @@ function preload() {
                         stuck = false
                         document.getElementById("image_text").style.visibility = "hidden"
                         document.getElementById("common_text").style.visibility = "hidden"
+                
+   if((securitygaurd === true)&&(startchat1 ===true)){
+        document.getElementById("display_text").innerHTML = "Press 'c' to talk to gaurd(!)"
+        if(keyCode == 67){
+            document.getElementById("display_text").innerHTML = ""
+            stuck = true
+            document.getElementById("image_text").style.visibility = "visible"
+            document.getElementById("common_text").style.visibility = "visible"
+            document.getElementById("image_pic").style.visibility = "visible"
+            document.getElementById("image_pic").style.backgroundImage = "url('head.png')"
+            document.getElementById("image_pic").style.transform = "scaleX(1)"
+            document.getElementById("common_text").innerHTML = "Good Evening"
+            
+
+        }
+        onkeypress = function(){
+                countcheck += 1  
+            }
+
+            if(countcheck ==1){
+                        document.getElementById("display_text").innerHTML = ""
+                        document.getElementById("image_text").style.visibility = "visible"
+                        document.getElementById("common_text").style.visibility = "visible"
+                        document.getElementById("image_pic").style.visibility = "visible"
+                        document.getElementById("image_pic").style.backgroundImage = "url('head.png')"
+                        document.getElementById("image_pic").style.transform = "scaleX(1)"
+                        document.getElementById("common_text").innerHTML = "Good Evening"
+                        stuck = true
+
+                    }
+                    else if(countcheck ==2){
+                        document.getElementById("image_pic").style.backgroundImage = "url('sshead.png')"
+                        document.getElementById("image_pic").style.transform = "scaleX(-1)"
+                        document.getElementById("")
+                        document.getElementById("common_text").innerHTML = "Hello Sir Knight"
+                    }
+                    else if(countcheck ==3){
+                        stuck = true
+                        document.getElementById("image_pic").style.backgroundImage = "url('sshead.png')"
+                        document.getElementById("image_pic").style.transform = "scaleX(-1)"
+                        document.getElementById("common_text").innerHTML = "You do not need <br>to unsheathe your <br>weapon here"
+                    }
+                    else if(countcheck ==4){
+                        stuck = true
+                        document.getElementById("image_pic").style.backgroundImage = "url('sshead.png')"
+                        document.getElementById("image_pic").style.transform = "scaleX(-1)"
+                        document.getElementById("common_text").innerHTML = "This place is protected<br>by the Empire"
+
+
+                    }
+                    else if(countcheck ==5){
+                        stuck = true
+                        document.getElementById("image_pic").style.backgroundImage = "url('head.png')"
+                        document.getElementById("image_pic").style.transform = "scaleX(1)"
+                        document.getElementById("common_text").innerHTML = "Thank you<br>for protecting<br> these people"
+
+                    }
+                    else if(countcheck ==6){
+                        stuck = true
+                        document.getElementById("image_pic").style.backgroundImage = "url('sshead.png')"
+                        document.getElementById("image_pic").style.transform = "scaleX(-1)"
+                        document.getElementById("common_text").innerHTML = "It is my job sir"   
+                    }
+                    else{
+                        
+                        stuck = false
+                        document.getElementById("image_text").style.visibility = "hidden"
+                        document.getElementById("common_text").style.visibility = "hidden"
                         document.getElementById("image_pic").style.visibility = "hidden"
+                    }            
+   }
+   else{
+        document.getElementById("display_text").innerHTML = ""
+        countcheck = 0
+        
+
+
+   }        document.getElementById("image_pic").style.visibility = "hidden"
                     }            
    }
    else{

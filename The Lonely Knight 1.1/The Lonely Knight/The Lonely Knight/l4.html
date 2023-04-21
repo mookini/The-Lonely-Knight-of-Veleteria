@@ -49,7 +49,14 @@
     let once = 1;
     let once1 = 1;
     let once4 = 1;
-    let check1 = 1
+    let once5 = 1;
+    let once9 = 1;
+    let check1 = 1;
+    let priesti;
+    let priest = false;
+    let againt = false;
+    let againtt;
+    let countcheck = -1;
     goback = true;
     gobackl4 = sessionStorage.getItem("gobackl4")
     gobackl44 = sessionStorage.getItem("gobackl44")
@@ -60,6 +67,8 @@
     health = sessionStorage.getItem("health")
     telebat = sessionStorage.getItem("telebat")
    if(telebat=="true"){
+    telebat = false
+    sessionStorage.setItem("telebat",telebat)
        moveX = sessionStorage.getItem("moveX")
        moveY = sessionStorage.getItem("moveY")
        moveX = parseInt(moveX)
@@ -99,7 +108,7 @@ function preload() {
         down = loadImage("down.png")
         levelm1.setVolume(1.0);
         levelm1.play()
-        
+        priesti=loadImage("priest.png")
 
         
     }
@@ -120,10 +129,10 @@ function preload() {
         fill(color(0,0,0,0.2))
 
 
-
-        if(fate ==1){
-            suattack = true
-        }
+        
+       if(fate ==1){
+          suattack = true
+       }
 
         //Surprise Attack function
 
@@ -176,6 +185,8 @@ function preload() {
                         place = "l4.html"
                         telebat = true
                         goblin = true
+                        sandinc=true
+                        sessionStorage.setItem("sandinc",sandinc)
                         sessionStorage.setItem("levelup",levelup)
                         sessionStorage.setItem("once4",once4)
                         sessionStorage.setItem("moveX",moveX)
@@ -312,12 +323,124 @@ function preload() {
 
 
       //LOADED@#!
+
+
+      image(priesti,900,150,100,120)
       
       gobacktol3=collideRectRect(moveX,moveY,50,50,0,580,50,100)
       gotol5=collideRectRect(moveX,moveY,50,50,1850,280,70,100)
       gotol7=collideRectRect(moveX,moveY,50,50,1100,25,100,50)
+      priest=collideRectRect(moveX,moveY,50,50,900,150,100,120)
+      if((priest === true)&&(once5==1)){
+        document.getElementById("display_text").innerHTML = "Press 'c' to talk to blind priest(?)"
+        againtt = true
+        if ((keyCode === 67)||(againt === true)){
+            againt = true
+            document.getElementById("display_text").innerHTML = ""
+            document.getElementById("image_text").style.visibility = "visible"
+            document.getElementById("common_text").style.visibility = "visible"
+            document.getElementById("image_pic").style.visibility = "visible"
+            document.getElementById("image_pic").style.backgroundImage = "url('phead.png')"
+            document.getElementById("image_pic").style.transform = "scaleX(1)"
+            document.getElementById("common_text").innerHTML = "Oh merciful God<br>give me help<br>in this desperate time"
+            stuck = true
+            onkeypress = function(){
+                countcheck += 1
+            
+                
+            }
+            if (countcheck==0){
+                    document.getElementById("common_text").innerHTML = "This wont work"
+                    countcheck = 1
+                
+                }
+            else if (countcheck == 1){
+                    document.getElementById("common_text").innerHTML = "Do you need<br>assistance?"
+                    document.getElementById("image_pic").style.transform = "scaleX(1)"
+                    document.getElementById("image_pic").style.backgroundImage = "url('head.png')"
+                    
+                }
+            else if (countcheck == 2){
+                    document.getElementById("image_pic").style.transform = ""
+                    document.getElementById("common_text").innerHTML = "God has answered<br>my prayers.<br>I am in a<br terrible situasion"
+                    document.getElementById("image_pic").style.visibility = "visible"
+                    document.getElementById("image_pic").style.transform = "scaleX(1)"
+                    document.getElementById("image_pic").style.backgroundImage = "url('phead.png')"
+                }
+            else if(countcheck ==3){
+                    document.getElementById("image_pic").style.transform = ""
+                    document.getElementById("common_text").innerHTML = "You see...<br> I well, we<br> are currently<br>surrounded by<br>mushrooms"
+                    document.getElementById("image_pic").style.visibility = "visible"
+                    document.getElementById("image_pic").style.transform = "scaleX(1)"
+                    document.getElementById("image_pic").style.backgroundImage = "url('phead.png')"
+
+            }
+            else if(countcheck ==4){
+                    document.getElementById("image_pic").style.transform = ""
+                    document.getElementById("common_text").innerHTML = "I apologize<br>But I think<br>you are halucinating"
+                    document.getElementById("image_pic").style.visibility = "visible"
+                    document.getElementById("image_pic").style.transform = "scaleX(1)"
+                    document.getElementById("image_pic").style.backgroundImage = "url('head.png')"
+
+            }
+
+            else if(countcheck ==5){
+                    document.getElementById("image_pic").style.transform = ""
+                    document.getElementById("common_text").innerHTML = "No...No<br>Look there<br>a evil mushroom<br>God save me"
+                    document.getElementById("image_pic").style.visibility = "visible"
+                    document.getElementById("image_pic").style.transform = "scaleX(1)"
+                    document.getElementById("image_pic").style.backgroundImage = "url('head.png')"
+
+            }
+            
+            else if (countcheck == 6){
+                    document.getElementById("image_text").style.visibility = "hidden"
+                    document.getElementById("common_text").style.visibility = "hidden"
+                    document.getElementById("image_pic").style.visibility = "hidden"
+                    stuck = false
+                    againt= false
+                    once5=2
+
+                    //intiate group battle wtih mushrooms here
+                    if(once9==1){
+
+                        once9 =2
+                        place = "l4.html"
+                        telebat = true
+                        mushroom = true
+                        sessionStorage.setItem("gold",gold)
+                        sessionStorage.setItem("xp",xp)
+                        sessionStorage.setItem("levelup",levelup)
+                        sessionStorage.setItem("once4",once4)
+                        sessionStorage.setItem("moveX",moveX)
+                        sessionStorage.setItem("moveY",moveY)
+                        sessionStorage.setItem("telebat",telebat)
+                        sessionStorage.setItem("place",place)
+                        sessionStorage.setItem("health",health)
+                        sessionStorage.setItem("mushroom",mushroom)
+                        ranattackdual()
+
+                    }
+            
 
 
+                
+                    
+                    
+                }
+        }
+    }
+
+    else {
+        document.getElementById("display_text").innerHTML = ""
+    }
+
+        
+
+    
+
+
+    
     if(gobacktol3===true){
         if(once==1){
             once+=1
@@ -340,8 +463,10 @@ function preload() {
         }
         
     }
-    
+
 }
+
+
 
 
 function mouseMoved() {

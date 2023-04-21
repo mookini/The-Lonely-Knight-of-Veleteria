@@ -287,10 +287,14 @@
                     if (goblin === true){
                         gold = Math.floor(Math.random()*11)+15
                         xp = Math.floor(Math.random()*25)+40
+                        goblin=false
+                        sessionStorage.setItem("goblin",goblin)
                     }
                     else if(mushroom === true){
                         gold = Math.floor(Math.random()*23)+15
                         xp = Math.floor(Math.random()*30)+20
+                        mushroom=false
+                        sessionStorage.setItem("mushroom",mushroom)
 
                     }
                     document.getElementById("goldr").innerHTML = gold +" Gold"

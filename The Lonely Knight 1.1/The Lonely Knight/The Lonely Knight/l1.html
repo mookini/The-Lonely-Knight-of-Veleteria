@@ -51,11 +51,11 @@
     let once4 = 1;
     let check1 = 1
     armor = sessionStorage.getItem("armor")
-    let gobackl1 = sessionStorage.getItem("gobackl1")
+    gobackl1 = sessionStorage.getItem("gobackl1")
     goback = true;
     firsttime = sessionStorage.getItem("firsttime")
     //NN
-    let gobackl11 = sessionStorage.getItem("gobackl11")
+    gobackl11 = sessionStorage.getItem("gobackl11")
 
     if(gobackl11=="true"){
         gobackl11 = false
@@ -88,6 +88,8 @@
     }
     if(telebat1=="true"){
         telebat1 = false
+        telebat = false
+        sessionStorage.setItem("telebat",telebat)
         sessionStorage.setItem("telebat1",telebat1)
         moveX1 = sessionStorage.getItem("moveX1")
         moveY1 = sessionStorage.getItem("moveY1")

@@ -55,7 +55,8 @@ let gobackl4;
 let gobackl44;
 
 
-
+let securitygaurd2;
+let mushroomboss;
 
 //Uneeded
 let gobacktoforest = false;

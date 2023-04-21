@@ -44,6 +44,7 @@
         let moveY = 620
         let stuck = false;
         musiconce = 1
+        let countcheck = -1;
         //Hit variabls
         armor = sessionStorage.getItem("armor")
         let once = 1;
@@ -58,6 +59,8 @@
         health = sessionStorage.getItem("health")
         telebat = sessionStorage.getItem("telebat")
     if(telebat=="true"){
+        telebat = false
+        sessionStorage.setItem("telebat",telebat)
         moveX = sessionStorage.getItem("moveX")
         moveY = sessionStorage.getItem("moveY")
         moveX = parseInt(moveX)
@@ -72,7 +75,7 @@
         sessionStorage.setItem("gobackl7",gobackl7)
     }
     
-    ///////
+    ///////Introduce new monster. Skeleton
 function preload() {
     soundFormats('mp3',"ogg")
     levelm1 = loadSound('levelm1.mp3')
@@ -157,7 +160,7 @@ function preload() {
                     once4 = 2
                     if (once1 == 1){
                         once1 = 2
-                        place = "l5.html"
+                        place = "l7.html"
                         telebat = true
                         goblin = true
                         sessionStorage.setItem("levelup",levelup)
