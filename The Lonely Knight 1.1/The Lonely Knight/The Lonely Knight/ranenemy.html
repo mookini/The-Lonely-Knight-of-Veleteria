@@ -91,7 +91,9 @@
         let wait = true;
         let movex = 1300
         let movexg = 300
-        let movexm = 300
+        let movexm = 150
+        let movexb = 300
+        let mushroombossi;
         armor = sessionStorage.getItem("armor")
         sandinc = sessionStorage.getItem("sandinc")
         let rani;
@@ -104,9 +106,10 @@
         let moveY = sessionStorage.getItem("moveY")
         telebat = sessionStorage.getItem("telebat")
         goblin = sessionStorage.getItem("goblin")
-        
-   
-      
+        mushroom=sessionStorage.getItem("mushroom")
+        mushroomboss=sessionStorage.getItem("mushroomboss")
+        snowinc=sessionStorage.getItem("snowinc")
+        ///Test
         //Choosing enemy
         //guess = Math.floor(Math.random()*2)+1
         ///
@@ -123,12 +126,31 @@
             goblin = false
             document.getElementById("enemyname").innerHTML = "Mushroom"
         }
+        else if(mushroomboss=="true"){
+            mushroomboss=true
+            goblin=false
+            mushroom=false
+            enemyhealth=250
+            document.getElementById("enemyname").innerHTML = "Rabid Mushroom"
+            document.getElementById("enemyname").style.right = "80vw"
+            document.getElementById("body3").style.backgroundImage = "url(l6.png)"
+            document.getElementById("body3").style.backgroundPositionY = "-30vw"
+            document.getElementById("body3").style.backgroundPositionX="0vw"
+
+
+        }
         //change map
         if(sandinc =="true"){
             document.getElementById("body3").style.backgroundImage = "url(sand.png)"
             sandinc = false
             sessionStorage.setItem("sandinc",sandinc)
         }
+        if(snowinc=="true"){
+            document.getElementById("body3").style.backgroundImage = "url(snow.png)"
+            snowinc = false
+            sessionStorage.setItem("snowinc",snowinc)
+        }
+
 
         function preload(){
             soundFormats('mp3',"ogg")
@@ -142,10 +164,10 @@
             createCanvas(w,h); 
             battlem1.setVolume(1.0);
             battlem1.play()
-            
             left = loadImage("left.png")
             mushroomi = loadImage("Mushroom_still.png")
             goblini = loadImage("Goblin_still.png")
+            mushroombossi = loadImage("mushroomboss.png")
         }
         function draw(){
             clear()
@@ -213,6 +235,10 @@
                 image(goblini,movexg,70,453,500)
 
             }
+            else if(mushroomboss===true){
+                enemyattack = Math.floor(Math.random()*3)+2
+                image(mushroombossi,movexm,-100,653,800)
+            }
             if (health <0){
                 health = 0
             }
@@ -244,6 +270,11 @@
                     else if(mushroom === true){
                         goldadd = Math.floor(Math.random()*23)+15
                         xpadd = Math.floor(Math.random()*30)+20
+
+                    }
+                    else if(mushroomboss===true){
+                        goldadd = Math.floor(Math.random()*73)+55
+                        xpadd = Math.floor(Math.random()*100)+70
 
                     }
                     document.getElementById("goldr").innerHTML = goldadd +" Gold"
@@ -279,6 +310,9 @@
                 }
                 else if(mushroom ===true){
                     fromdeath = "Died From a Mushroom Attack"
+                }
+                else if(mushroomboss===true){
+                    fromdeath = "Died From the Rabid Mushroom"
                 }
                 document.getElementById("goldr").innerHTML = fromdeath
                 document.getElementById("restart").style.visibility = "visible"
@@ -702,9 +736,145 @@
                 }
                  
             }
-            else if(mushroom ===true){
+            else if((mushroom ===true)||(mushroomboss===true)){
+                if ((slash===true)||(stab===true)){
+                    setTimeout(() => { movexm+=200 }, 3500);
+                    setTimeout(() => { movexm+=200 }, 3700);
+                    setTimeout(() => { movexm+=200 }, 3900);
+                    setTimeout(() => { movexm+=100 }, 4100);
+                    setTimeout(() => { movexm+=100 }, 4300);
+
+
+                    setTimeout(() => {
+                    if (counte1 == 1){
+                        document.getElementById("enemyanimation").style.animation = "enemyattackm 1.5s linear"
+                        counte1 = 2
+                        }
+                    else if(counte1 == 2){
+                            document.getElementById("enemyanimation1").style.animation = "enemyattackm 1.5s linear"
+                            counte1 = 1
+                    }
+                    health -= enemyattack
+                    }, 4500);
+                    setTimeout(() => { movexm-=200 }, 5500);
+                    setTimeout(() => { movexm-=200 }, 5700);
+                    setTimeout(() => { movexm-=200 }, 5900);
+                    setTimeout(() => { movexm-=100 }, 6100);
+                    setTimeout(() => { movexm-=100 }, 6300);
+                }
+                else if((rest===true)||(block===true)){
+                    setTimeout(() => { movexm+=200 }, 200);
+                    setTimeout(() => { movexm+=200 }, 400);
+                    setTimeout(() => { movexm+=200 }, 600);
+                    setTimeout(() => { movexm+=100 }, 800);
+                    setTimeout(() => { movexm+=100 }, 1000);
+
+
+                    setTimeout(() => {
+                    if (counte1 == 1){
+                        document.getElementById("enemyanimation").style.animation = "enemyattackm 1.5s linear"
+                        counte1 = 2
+                        }
+                    else if(counte1 == 2){
+                            document.getElementById("enemyanimation1").style.animation = "enemyattackm 1.5s linear"
+                            counte1 = 1
+                    }
+                    health -= enemyattack
+                    }, 1100);
+                    setTimeout(() => { movexm-=200 }, 2500);
+                    setTimeout(() => { movexm-=200 }, 2700);
+                    setTimeout(() => { movexm-=200 }, 2900);
+                    setTimeout(() => { movexm-=100 }, 2100);
+                    setTimeout(() => { movexm-=100 }, 2300);
+
+
+                }
+                else if(dodge===true){
+                    if(rani==1){
+                        setTimeout(() => { movexm+=200 }, 200);
+                        setTimeout(() => { movexm+=200 }, 400);
+                        setTimeout(() => { movexm+=200 }, 600);
+                        setTimeout(() => { movexm+=100 }, 800);
+                        setTimeout(() => { movexm+=100 }, 1000);
+                        setTimeout(() => { movexm+=200 }, 1200);
+
+
+                        setTimeout(() => {
+                        if (counte1 == 1){
+                            document.getElementById("enemyanimation").style.animation = "enemyattackm 1.5s linear"
+                            counte1 = 2
+                            }
+                        else if(counte1 == 2){
+                                document.getElementById("enemyanimation1").style.animation = "enemyattackm 1.5s linear"
+                                counte1 = 1
+                        }}, 1400);
+                            setTimeout(() => { movexm-=200 }, 2800);
+                            //Moving back MC
+                            setTimeout(() => { movex-=200 }, 3000);
+                            setTimeout(() => { movexm-=200 }, 3000);
+                            setTimeout(() => { movexm-=200 }, 3200);
+                            setTimeout(() => { movexm-=100 }, 3400);
+                            setTimeout(() => { movexm-=100 }, 3600);
+
+                    }
+                    else if(rani==2){
+                        setTimeout(() => { movexm+=200 }, 200);
+                        setTimeout(() => { movexm+=200 }, 400);
+                        setTimeout(() => { movexm+=200 }, 600);
+                        setTimeout(() => { movexm+=100 }, 800);
+                        setTimeout(() => { movexm+=100 }, 1000);
+
+
+                        setTimeout(() => {
+                        if (counte1 == 1){
+                            document.getElementById("enemyanimation").style.animation = "enemyattackm 1.5s linear"
+                            counte1 = 2
+                            }
+                        else if(counte1 == 2){
+                                document.getElementById("enemyanimation1").style.animation = "enemyattackm 1.5s linear"
+                                counte1 = 1
+                        }
+                        health -= enemyattack
+                        }, 1100);
+                        setTimeout(() => { movexm-=200 }, 2500);
+                        setTimeout(() => { movexm-=200 }, 2700);
+                        setTimeout(() => { movexm-=200 }, 2900);
+                        setTimeout(() => { movexm-=100 }, 2100);
+                        setTimeout(() => { movexm-=100 }, 2300);
+
+                    }
+                    else{
+                        setTimeout(() => { movexm+=200 }, 200);
+                        setTimeout(() => { movexm+=200 }, 400);
+                        setTimeout(() => { movexm+=200 }, 600);
+                        setTimeout(() => { movexm+=100 }, 800);
+                        setTimeout(() => { movexm+=100 }, 1000);
+
+
+                        setTimeout(() => {
+                        if (counte1 == 1){
+                            document.getElementById("enemyanimation").style.animation = "enemyattackm 1.5s linear"
+                            counte1 = 2
+                        }
+                        else if(counte1 == 2){
+                            document.getElementById("enemyanimation1").style.animation = "enemyattackm 1.5s linear"
+                            counte1 = 1
+                        }
+                        health -= enemyattack
+                        }, 1100);
+                        setTimeout(() => { movexm-=200 }, 2500);
+                        setTimeout(() => { movexm-=200 }, 2700);
+                        setTimeout(() => { movexm-=200 }, 2900);
+                        setTimeout(() => { movexm-=100 }, 2100);
+                        setTimeout(() => { movexm-=100 }, 2300);
+
+                    }
+
+                }
+                 
 
             }
+
             
 
             document.getElementById("slash").innerHTML = "1:Slash"

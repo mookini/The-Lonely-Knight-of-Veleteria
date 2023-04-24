@@ -755,3 +755,19 @@ mark {background-color: darkblue;
      
     }
 }
+
+@keyframes enemyattackm {
+   
+    0%{
+ 
+     background-image: url(mattack1.png)
+    }
+    50%{
+     background-image: url(mattack2.png)
+ 
+    }
+    100%{
+     
+    }
+    
+}

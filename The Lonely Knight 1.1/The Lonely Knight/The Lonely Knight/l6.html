@@ -50,6 +50,7 @@
         let once = 1;
         let once1 = 1;
         let once4 = 1;
+        let once11 = 11
         let check1 = 1
         let bossfight;
         //NN
@@ -59,7 +60,7 @@
         health = sessionStorage.getItem("health")
         telebat = sessionStorage.getItem("telebat")
     if(telebat=="true"){
-
+        once11=sessionStorage.getItem("once11")
         telebat = false
         sessionStorage.setItem("telebat",telebat)
         moveX = sessionStorage.getItem("moveX")
@@ -297,16 +298,18 @@ function preload() {
 
            //LOADED@#!
 
+        bossfight=collideRectRect(moveX,moveY,100,100,400,0,200,1000)
 
 
-        if(bossfight===true){ 
+        if((bossfight===true)&&(once11==1)){ 
+            once11=2
             document.getElementById("display_text").innerHTML = ""
             document.getElementById("image_text").style.visibility = "visible"
             document.getElementById("common_text").style.visibility = "visible"
             document.getElementById("common_text").innerHTML = "*Chiiiiiiiii<br>*Chiiiiiiii<br>you can't run"
             document.getElementById("image_pic").style.visibility = "visible"
             //Put mushroom here. Boss mushroom. (different color)
-            document.getElementById("image_pic").style.backgroundImage = "url('.png')"
+            document.getElementById("image_pic").style.backgroundImage = "url('mbhead.png')"
             stuck = true
            
             setTimeout(function(){
@@ -324,6 +327,7 @@ function preload() {
                         place = "l6.html"
                         telebat = true
                         mushroomboss = true
+                        sessionStorage.setItem("once11",once11)
                         sessionStorage.setItem("levelup",levelup)
                         sessionStorage.setItem("once4",once4)
                         sessionStorage.setItem("moveX",moveX)

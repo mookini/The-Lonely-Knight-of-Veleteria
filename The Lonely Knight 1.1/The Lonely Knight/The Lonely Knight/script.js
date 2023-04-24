@@ -76,6 +76,7 @@ let suattack;
 let fate;
 let randomin;
 let sandinc;
+let snowinc;
 //Music
 let music_start;
 let levelm1;

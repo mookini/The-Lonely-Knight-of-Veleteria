@@ -68,6 +68,7 @@
     telebat = sessionStorage.getItem("telebat")
    if(telebat=="true"){
     telebat = false
+    once5=sessionStorage.getItem("once5")
     sessionStorage.setItem("telebat",telebat)
        moveX = sessionStorage.getItem("moveX")
        moveY = sessionStorage.getItem("moveY")
@@ -389,7 +390,7 @@ function preload() {
                     document.getElementById("common_text").innerHTML = "No...No<br>Look there<br>a evil mushroom<br>God save me"
                     document.getElementById("image_pic").style.visibility = "visible"
                     document.getElementById("image_pic").style.transform = "scaleX(1)"
-                    document.getElementById("image_pic").style.backgroundImage = "url('head.png')"
+                    document.getElementById("image_pic").style.backgroundImage = "url('phead.png')"
 
             }
             
@@ -405,6 +406,7 @@ function preload() {
                     if(once9==1){
 
                         once9 =2
+                        sessionStorage.setItem("once5",once5)
                         place = "l4.html"
                         telebat = true
                         mushroom = true

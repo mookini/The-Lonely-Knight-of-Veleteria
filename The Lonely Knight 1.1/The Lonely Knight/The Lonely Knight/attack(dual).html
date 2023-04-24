@@ -72,6 +72,8 @@
         let once2 = 1
         let once8 = 1
         let once9 = 1
+        let once14=1
+        let warning3=false;
         let counta1 = 1
         let counta2 = 1
         let countb1 = 1
@@ -95,7 +97,7 @@
         let movex = 1300
         let movexg = 300
         let movexg2 = 300
-        let movexm = 300
+        let movexm = 150
         let sizeg1w = 453
         let sizeg2w = 453
         let sizeg1h = 500
@@ -118,13 +120,13 @@
         console.log(moveX)
         console.log(telebat)
         
-        
-
+       
 
 
         //Choosing enemy
         //guess = Math.floor(Math.random()*2)+1
         ///
+
         if ((goblin == "true")||(guess == 1)){
             enemyhealth = 50
             enemyhealth2 = 50
@@ -145,7 +147,6 @@
             document.getElementById("enemyname").style.bottom = "18%"
             document.getElementById("enemyname").style.right = "80%"
         }
-
 
 
 
@@ -183,6 +184,10 @@
                 once9 = 2
 
             }
+            if((once14==1)&&(warning3===true)){
+                document.getElementById("display_text2").innerHTML = "use up and down arrow keys to choose which enemy to stab"
+                once14=2
+            }
             if(warning2===true){
                 document.getElementById("display_text2").innerHTML =""
             }
@@ -216,8 +221,8 @@
             //Enemy choosing power of attack
             if (mushroom === true){
                 enemyattack = Math.floor(Math.random()*6)+4
-                image(mushroomi,movexm,-100,653,800)
-
+                image(mushroomi,movexm,-200,653,800)
+                image(mushroomi,movexm, 50,653,800)
                 document.getElementById("enemyhealth").innerHTML = "mushroom 1 Health: "+enemyhealth
                 document.getElementById("enemyhealth2").innerHTML = "mushroom 2 Health: "+enemyhealth2
                 document.getElementById("enemyhealth").style.fontSize = "1.7vw"
@@ -373,6 +378,7 @@
                 dodge = false;
                 rest = false;
                 warning = true
+                warning3=true
                 music_start = true
                 if(goblin===true){
                     if (enemyhealth>0){
@@ -909,6 +915,153 @@
                  
             }
             else if(mushroom ===true){
+                if ((slash===true)||(stab===true)){
+                    setTimeout(() => { movexm+=200 }, 3500);
+                    setTimeout(() => { movexm+=200 }, 3700);
+                    setTimeout(() => { movexm+=200 }, 3900);
+                    setTimeout(() => { movexm+=100 }, 4100);
+                    setTimeout(() => { movexm+=100 }, 4300);
+
+
+                    setTimeout(() => {
+                    if (counte1 == 1){
+                        document.getElementById("enemyanimation").style.animation = "enemyattackm 1.5s linear"
+                        counte1 = 2
+                        }
+                    else if(counte1 == 2){
+                            document.getElementById("enemyanimation1").style.animation = "enemyattackm 1.5s linear"
+                            counte1 = 1
+                    }
+                    health -= enemyattack
+                    }, 4500);
+                    setTimeout(() => { movexm-=200 }, 5500);
+                    setTimeout(() => { movexm-=200 }, 5700);
+                    setTimeout(() => { movexm-=200 }, 5900);
+                    setTimeout(() => { movexm-=100 }, 6100);
+                    setTimeout(() => { movexm-=100 }, 6300);
+
+                }
+                else if((rest===true)||(block===true)){
+                    setTimeout(() => { movexm+=200 }, 200);
+                    setTimeout(() => { movexm+=200 }, 400);
+                    setTimeout(() => { movexm+=200 }, 600);
+                    setTimeout(() => { movexm+=100 }, 800);
+                    setTimeout(() => { movexm+=100 }, 1000);
+
+
+                    setTimeout(() => {
+                    if (counte1 == 1){
+                        document.getElementById("enemyanimation").style.animation = "enemyattackm 1.5s linear"
+                        counte1 = 2
+                        }
+                    else if(counte1 == 2){
+                            document.getElementById("enemyanimation1").style.animation = "enemyattackm 1.5s linear"
+                            counte1 = 1
+                    }
+                    health -= enemyattack
+                    }, 1100);
+                    setTimeout(() => { movexm-=200 }, 2500);
+                    setTimeout(() => { movexm-=200 }, 2700);
+                    setTimeout(() => { movexm-=200 }, 2900);
+                    setTimeout(() => { movexm-=100 }, 2100);
+                    setTimeout(() => { movexm-=100 }, 2300);
+
+
+
+                }
+                else if(dodge===true){
+                    if(rani==1){
+                        setTimeout(() => { movexm+=200 }, 200);
+                        setTimeout(() => { movexm+=200 }, 400);
+                        setTimeout(() => { movexm+=200 }, 600);
+                        setTimeout(() => { movexm+=100 }, 800);
+                        setTimeout(() => { movexm+=100 }, 1000);
+                        setTimeout(() => { movexm+=200 }, 1200);
+
+                        
+
+
+                        setTimeout(() => {
+                        if (counte1 == 1){
+                            document.getElementById("enemyanimation").style.animation = "enemyattackm 1.5s linear"
+                            counte1 = 2
+                            }
+                        else if(counte1 == 2){
+                                document.getElementById("enemyanimation1").style.animation = "enemyattackm 1.5s linear"
+                                counte1 = 1
+                        }}, 1400);
+                            setTimeout(() => { movexm-=200 }, 2800);
+                            //Moving back MC
+                            setTimeout(() => { movex-=200 }, 3000);
+                            setTimeout(() => { movexm-=200 }, 3000);
+                            setTimeout(() => { movexm-=200 }, 3200);
+                            setTimeout(() => { movexm-=100 }, 3400);
+                            setTimeout(() => { movexm-=100 }, 3600);
+
+                           
+
+                    }
+                    else if(rani==2){
+                        setTimeout(() => { movexm+=200 }, 200);
+                        setTimeout(() => { movexm+=200 }, 400);
+                        setTimeout(() => { movexm+=200 }, 600);
+                        setTimeout(() => { movexm+=100 }, 800);
+                        setTimeout(() => { movexm+=100 }, 1000);
+
+            
+
+
+                        setTimeout(() => {
+                        if (counte1 == 1){
+                            document.getElementById("enemyanimation").style.animation = "enemyattackm 1.5s linear"
+                            counte1 = 2
+                            }
+                        else if(counte1 == 2){
+                                document.getElementById("enemyanimation1").style.animation = "enemyattackm 1.5s linear"
+                                counte1 = 1
+                        }
+                        health -= enemyattack
+                        }, 1100);
+                        setTimeout(() => { movexm-=200 }, 2500);
+                        setTimeout(() => { movexm-=200 }, 2700);
+                        setTimeout(() => { movexm-=200 }, 2900);
+                        setTimeout(() => { movexm-=100 }, 2100);
+                        setTimeout(() => { movexm-=100 }, 2300);
+
+
+                    }
+                    else{
+                        setTimeout(() => { movexm+=200 }, 200);
+                        setTimeout(() => { movexm+=200 }, 400);
+                        setTimeout(() => { movexm+=200 }, 600);
+                        setTimeout(() => { movexm+=100 }, 800);
+                        setTimeout(() => { movexm+=100 }, 1000);
+
+                  
+
+
+                        setTimeout(() => {
+                        if (counte1 == 1){
+                            document.getElementById("enemyanimation").style.animation = "enemyattackm 1.5s linear"
+                            counte1 = 2
+                        }
+                        else if(counte1 == 2){
+                            document.getElementById("enemyanimation1").style.animation = "enemyattackm 1.5s linear"
+                            counte1 = 1
+                        }
+                        health -= enemyattack
+                        }, 1100);
+                        setTimeout(() => { movexm-=200 }, 2500);
+                        setTimeout(() => { movexm-=200 }, 2700);
+                        setTimeout(() => { movexm-=200 }, 2900);
+                        setTimeout(() => { movexm-=100 }, 2100);
+                        setTimeout(() => { movexm-=100 }, 2300);
+
+                  
+
+                    }
+
+                }
 
             }
             
