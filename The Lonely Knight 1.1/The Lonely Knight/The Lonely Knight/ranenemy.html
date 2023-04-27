@@ -93,7 +93,10 @@
         let movexg = 300
         let movexm = 150
         let movexb = 300
-        let mushroombossi;
+        let mushroombossi
+        startslash=true
+        startstab = true
+        enemystab=true
         armor = sessionStorage.getItem("armor")
         sandinc = sessionStorage.getItem("sandinc")
         let rani;
@@ -105,6 +108,9 @@
         let moveX = sessionStorage.getItem("moveX")
         let moveY = sessionStorage.getItem("moveY")
         telebat = sessionStorage.getItem("telebat")
+        goblin=false
+        mushroom=false
+        mushroomboss=false
         goblin = sessionStorage.getItem("goblin")
         mushroom=sessionStorage.getItem("mushroom")
         mushroomboss=sessionStorage.getItem("mushroomboss")
@@ -113,16 +119,23 @@
         //Choosing enemy
         //guess = Math.floor(Math.random()*2)+1
         ///
+
+
+     
+
+
         if ((goblin == "true")||(guess == 1)){
             enemyhealth = 60
             goblin = true
             mushroom = false
+            mushroomboss=false
             document.getElementById("enemyname").innerHTML = "Goblin"
             document.getElementById("enemyname").style.right = "84%"
         }
         else if ((mushroom == "true")||(guess == 2)){
             enemyhealth = 110
             mushroom = true
+            mushroomboss=false
             goblin = false
             document.getElementById("enemyname").innerHTML = "Mushroom"
         }
@@ -150,11 +163,27 @@
             snowinc = false
             sessionStorage.setItem("snowinc",snowinc)
         }
-
+        randommusic=Math.floor(Math.random()*2)+1
 
         function preload(){
-            soundFormats('mp3',"ogg")
-            battlem1 = loadSound('battlem1.mp3')
+            soundFormats('mp3',"ogg","wav")
+            if(randommusic==1){
+                battlem1 = loadSound('battlem1.mp3')
+
+            }
+            else if(randommusic==2){
+                battlem1 = loadSound('battlem2.mp3')
+            }
+            else if(randommusic==3){
+                battlem1 = loadSound('battlem3.mp3')
+            }
+            slash1 =loadSound('slash1.wav')
+            slash2 =loadSound('slash2.wav')
+            slash3 =loadSound('slash3.wav')
+            slash4 =loadSound('slash4.wav')
+            slash5 =loadSound('slash5.wav')
+            slash6 =loadSound('slash6.wav')
+            dead =loadSound('dead.wav')
         }
 
 
@@ -163,6 +192,13 @@
         function setup() {
             createCanvas(w,h); 
             battlem1.setVolume(1.0);
+            slash1.setVolume(1.0);
+            slash2.setVolume(1.0);
+            slash3.setVolume(1.0);
+            slash4.setVolume(1.0);
+            slash5.setVolume(1.0);
+            slash6.setVolume(1.0);
+            dead.setVolume(1.0);
             battlem1.play()
             left = loadImage("left.png")
             mushroomi = loadImage("Mushroom_still.png")
@@ -171,7 +207,6 @@
         }
         function draw(){
             clear()
-            console.log("Sandinc:",sandinc)
             if((musiconce == 1)&&(music_start===true)){
                     userStartAudio()
                     musiconce=2
@@ -277,6 +312,12 @@
                         xpadd = Math.floor(Math.random()*100)+70
 
                     }
+                    mushroomboss=false
+                    mushroom=false
+                    goblin=false
+                    sessionStorage.setItem("mushroomboss",mushroomboss)
+                    sessionStorage.setItem("mushroom",mushroom)
+                    sessionStorage.setItem("goblin",goblin)
                     document.getElementById("goldr").innerHTML = goldadd +" Gold"
                     document.getElementById("xpr").innerHTML  = xpadd +" XP"
                     sessionStorage.setItem("xpadd",xpadd)
@@ -444,6 +485,17 @@
                                 document.getElementById("playeranimation1").style.animation = "playerattackslash 1.5s linear"
                                 counta1 = 1
                             }
+                            if(startslash===true){
+                                slash3.play()
+                                slash1.play()
+                                setTimeout(() => {
+                                    startslash=false
+                                    slash3.pause()
+                                    slash1.pause()
+                                
+                                }, 2000);
+
+                            }
                             
                             if(levelup=="true"){
                                 enemyhealth -= Math.floor(Math.random()*9)+6
@@ -495,6 +547,15 @@
                             else if(counta2 == 2){
                                 document.getElementById("playeranimation1").style.animation = "playerattackstab 1.5s linear"
                                 counta2 = 1
+                            }
+
+                            if(startstab===true){
+                                slash6.play()
+                                setTimeout(() => {
+                                    startslash=false
+                                    slash6.pause()
+                                
+                                }, 2000);
                             }
 
                             if(levelup=="true"){
@@ -578,6 +639,10 @@
                 
                 
             }
+            else{
+              startslash=true
+              startstab = true
+            }
 
 
 
@@ -617,6 +682,14 @@
                             document.getElementById("enemyanimation1").style.animation = "enemyattackg 1.5s linear"
                             counte1 = 1
                     }
+                        slash5.play()
+                        slash4.play()
+                        setTimeout(() => {
+                            enemystab=false
+                            slash5.pause()
+                            slash4.pause()
+                                
+                    }, 2000);
                     health -= enemyattack
                     }, 4500);
                     setTimeout(() => { movexg-=200 }, 5500);
@@ -642,6 +715,15 @@
                             document.getElementById("enemyanimation1").style.animation = "enemyattackg 1.5s linear"
                             counte1 = 1
                     }
+
+                    slash5.play()
+                        slash4.play()
+                        setTimeout(() => {
+                            enemystab=false
+                            slash5.pause()
+                            slash4.pause()
+                                
+                    }, 2000);
                     health -= enemyattack
                     }, 1100);
                     setTimeout(() => { movexg-=200 }, 2500);
@@ -671,6 +753,18 @@
                                 document.getElementById("enemyanimation1").style.animation = "enemyattackg 1.5s linear"
                                 counte1 = 1
                         }}, 1400);
+                        slash5.play()
+                        slash4.play()
+                        setTimeout(() => {
+                            enemystab=false
+                            slash5.pause()
+                            slash4.pause()
+                                
+                    }, 2000);
+
+
+
+                        
                             setTimeout(() => { movexg-=200 }, 2800);
                             //Moving back MC
                             setTimeout(() => { movex-=200 }, 3000);
@@ -696,7 +790,15 @@
                         else if(counte1 == 2){
                                 document.getElementById("enemyanimation1").style.animation = "enemyattackg 1.5s linear"
                                 counte1 = 1
-                        }
+                            }
+                        slash5.play()
+                        slash4.play()
+                        setTimeout(() => {
+                            enemystab=false
+                            slash5.pause()
+                            slash4.pause()
+                                
+                    }, 2000);
                         health -= enemyattack
                         }, 1100);
                         setTimeout(() => { movexg-=200 }, 2500);
@@ -723,6 +825,18 @@
                             document.getElementById("enemyanimation1").style.animation = "enemyattackg 1.5s linear"
                             counte1 = 1
                         }
+
+                        
+                        slash5.play()
+                        slash4.play()
+                        setTimeout(() => {
+                            enemystab=false
+                            slash5.pause()
+                            slash4.pause()
+                                
+                    }, 2000);
+
+
                         health -= enemyattack
                         }, 1100);
                         setTimeout(() => { movexg-=200 }, 2500);
@@ -754,6 +868,14 @@
                             document.getElementById("enemyanimation1").style.animation = "enemyattackm 1.5s linear"
                             counte1 = 1
                     }
+                        slash5.play()
+                        slash4.play()
+                        setTimeout(() => {
+                            enemystab=false
+                            slash5.pause()
+                            slash4.pause()
+                                
+                    }, 2000);
                     health -= enemyattack
                     }, 4500);
                     setTimeout(() => { movexm-=200 }, 5500);
@@ -779,6 +901,14 @@
                             document.getElementById("enemyanimation1").style.animation = "enemyattackm 1.5s linear"
                             counte1 = 1
                     }
+                        slash5.play()
+                        slash4.play()
+                        setTimeout(() => {
+                            enemystab=false
+                            slash5.pause()
+                            slash4.pause()
+                                
+                    }, 2000);
                     health -= enemyattack
                     }, 1100);
                     setTimeout(() => { movexm-=200 }, 2500);
@@ -796,7 +926,7 @@
                         setTimeout(() => { movexm+=200 }, 600);
                         setTimeout(() => { movexm+=100 }, 800);
                         setTimeout(() => { movexm+=100 }, 1000);
-                        setTimeout(() => { movexm+=200 }, 1200);
+                        setTimeout(() => { movex+=200 }, 1200);
 
 
                         setTimeout(() => {
@@ -808,6 +938,14 @@
                                 document.getElementById("enemyanimation1").style.animation = "enemyattackm 1.5s linear"
                                 counte1 = 1
                         }}, 1400);
+                        slash5.play()
+                        slash4.play()
+                        setTimeout(() => {
+                            enemystab=false
+                            slash5.pause()
+                            slash4.pause()
+                                
+                    }, 2000);
                             setTimeout(() => { movexm-=200 }, 2800);
                             //Moving back MC
                             setTimeout(() => { movex-=200 }, 3000);
@@ -834,6 +972,14 @@
                                 document.getElementById("enemyanimation1").style.animation = "enemyattackm 1.5s linear"
                                 counte1 = 1
                         }
+                        slash5.play()
+                        slash4.play()
+                        setTimeout(() => {
+                            enemystab=false
+                            slash5.pause()
+                            slash4.pause()
+                                
+                    }, 2000);
                         health -= enemyattack
                         }, 1100);
                         setTimeout(() => { movexm-=200 }, 2500);
@@ -860,6 +1006,14 @@
                             document.getElementById("enemyanimation1").style.animation = "enemyattackm 1.5s linear"
                             counte1 = 1
                         }
+                        slash5.play()
+                        slash4.play()
+                        setTimeout(() => {
+                            enemystab=false
+                            slash5.pause()
+                            slash4.pause()
+                                
+                    }, 2000);
                         health -= enemyattack
                         }, 1100);
                         setTimeout(() => { movexm-=200 }, 2500);

@@ -85,7 +85,7 @@
     ///////I commented out the music so it is easy to work on *(@*#*&$)#$@(*)$@#
 function preload() {
     soundFormats('mp3',"ogg")
-    //levelm1 = loadSound('levelm1.mp3')
+    levelm1 = loadSound('levelm1.mp3')
 }
     function setup() {
         
@@ -97,8 +97,8 @@ function preload() {
         securityi = loadImage("ss.png")
         merchanti = loadImage("merchent.png")
         blacksmithi = loadImage("merchent2.png")
-        //levelm1.setVolume(1.0);
-        //levelm1.play()
+        levelm1.setVolume(1.0);
+        levelm1.play()
         
 
         
@@ -108,17 +108,22 @@ function preload() {
         
 
 
-    //Musicimage(
-    //if((musiconce == 1)&&(music_start===true)){
-          //  userStartAudio()
-           // musiconce=2
-       // }
-       // if (levelm1.isPlaying()){
+   
+        if((musiconce == 1)&&(music_start===true)){
+            userStartAudio()
+            musiconce=2
+        }
+        if (levelm1.isPlaying()){
 
-       // }
-        //else{
-            //levelm1.loop()
-           // }
+        }
+        else{
+            levelm1.loop()
+            }
+        noStroke()
+        fill(color(0,0,0,0.2))
+        if(fate ==1){
+            suattack = true
+        }
 
         
         noStroke()

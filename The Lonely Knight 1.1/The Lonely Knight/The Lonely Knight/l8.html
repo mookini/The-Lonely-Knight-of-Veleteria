@@ -83,7 +83,7 @@
     ///////A poor old swordsman asks for money. BY giving money the player does not get anything.
 function preload() {
     soundFormats('mp3',"ogg")
-    levelm1 = loadSound('levelm1.mp3')
+    levelm3 = loadSound('levelm3.mp3')
 }
     function setup() {
         
@@ -93,8 +93,8 @@ function preload() {
         up = loadImage("up.png")
         down = loadImage("down.png")
         poormani=loadImage("poorknight.png")
-        levelm1.setVolume(1.0);
-        levelm1.play()
+        levelm3.setVolume(1.0);
+        levelm3.play()
         
 
         
@@ -106,11 +106,11 @@ function preload() {
             userStartAudio()
             musiconce=2
         }
-        if (levelm1.isPlaying()){
+        if (levelm3.isPlaying()){
 
         }
         else{
-            levelm1.loop()
+            levelm3.loop()
             }
         noStroke()
         fill(color(0,0,0,0.2))

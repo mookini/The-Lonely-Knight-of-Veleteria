@@ -98,7 +98,7 @@
     ///////
 function preload() {
     soundFormats('mp3',"ogg")
-    levelm1 = loadSound('levelm1.mp3')
+    levelm2 = loadSound('levelm2.mp3')
 }
     function setup() {
         
@@ -107,8 +107,8 @@ function preload() {
         left = loadImage("left.png")
         up = loadImage("up.png")
         down = loadImage("down.png")
-        levelm1.setVolume(1.0);
-        levelm1.play()
+        levelm2.setVolume(1.0);
+        levelm2.play()
         priesti=loadImage("priest.png")
 
         
@@ -119,11 +119,11 @@ function preload() {
             userStartAudio()
             musiconce=2
         }
-        if (levelm1.isPlaying()){
+        if (levelm2.isPlaying()){
 
         }
         else{
-            levelm1.loop()
+            levelm2.loop()
             }
         clear()
         noStroke()

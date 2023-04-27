@@ -80,8 +80,29 @@ let snowinc;
 //Music
 let music_start;
 let levelm1;
+let levelm2;
+let levelm3;
+let randommusic;
 let battlem1;
+let battlem2;
+let battlem3;
 let musiconce;
+//SFX sounds
+let slash1;
+let slash2;
+let slash3;
+let slash4;
+let slash5;
+let slash6;
+let dead;
+//Intiate SFX sounds
+let startslash;
+let changeslash;
+let startstab;
+let changestab;
+let startdead;
+let enemystab;
+let enemychangestab;
 //Upgrades
 let armor;
 function ranattack(){

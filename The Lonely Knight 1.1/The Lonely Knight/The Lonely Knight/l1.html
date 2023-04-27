@@ -50,6 +50,10 @@
     let once1 = 1;
     let once4 = 1;
     let check1 = 1
+    let girlagain;
+    let endchat6=true
+    let againt=false
+    let countcheck=-1
     armor = sessionStorage.getItem("armor")
     gobackl1 = sessionStorage.getItem("gobackl1")
     goback = true;
@@ -122,6 +126,7 @@ function preload() {
         left = loadImage("left.png")
         up = loadImage("up.png")
         down = loadImage("down.png")
+        girl = loadImage("littlegirl.png")
         levelm1.setVolume(1.0);
         levelm1.play()
         ///Loaded Trees
@@ -351,6 +356,92 @@ function preload() {
 
 
     //LOADED@#!
+    image(girl,400, 281,60,60)
+    girlagain=collideRectRect(moveX1,moveY1,200,200,400,281,100,100)
+    if((girlagain===true)&&(endchat6===true)){
+        document.getElementById("display_text").innerHTML = "Press 'c' to talk to girl(!)"
+
+        if ((keyCode === 67)||(againt === true)){
+            againt = true
+            document.getElementById("display_text").innerHTML = ""
+            document.getElementById("image_text").style.visibility = "visible"
+            document.getElementById("common_text").style.visibility = "visible"
+            document.getElementById("image_pic").style.visibility = "visible"
+            document.getElementById("image_pic").style.backgroundImage = "url('girlhead.png')"
+            document.getElementById("image_pic").style.transform = "scaleX(1)"
+            document.getElementById("common_text").innerHTML = "Thank you<br>for saving<br>me"
+            stuck = true
+            onkeypress = function(){
+                countcheck += 1
+            
+                
+            }
+            if (countcheck==0){
+                    document.getElementById("common_text").innerHTML = "This wont work"
+                    countcheck = 1
+                
+                }
+            else if (countcheck == 1){
+                    document.getElementById("common_text").innerHTML = "It is my<br>my duty"
+                    document.getElementById("image_pic").style.transform = "scaleX(1)"
+                    document.getElementById("image_pic").style.backgroundImage = "url('head.png')"
+                    
+                }
+            else if (countcheck == 2){
+                    document.getElementById("image_pic").style.transform = ""
+                    document.getElementById("common_text").innerHTML = "I have no<br>money to give<br>but I<br>have information"
+                    document.getElementById("image_pic").style.visibility = "visible"
+                    document.getElementById("image_pic").style.transform = "scaleX(1)"
+                    document.getElementById("image_pic").style.backgroundImage = "url('girlhead.png')"
+                }
+            else if(countcheck ==3){
+                    document.getElementById("image_pic").style.transform = ""
+                    document.getElementById("common_text").innerHTML = "If you follow<br>this path<br>you will get<br>to the market"
+                    document.getElementById("image_pic").style.visibility = "visible"
+                    document.getElementById("image_pic").style.transform = "scaleX(1)"
+                    document.getElementById("image_pic").style.backgroundImage = "url('girlhead.png')"
+                   
+
+            }
+            else if(countcheck ==4){
+                    document.getElementById("image_pic").style.transform = ""
+                    document.getElementById("common_text").innerHTML = "If you take<br>a right at<br>the path<br>and follow it<br>you will reach<br>another market"
+                    document.getElementById("image_pic").style.visibility = "visible"
+                    document.getElementById("image_pic").style.transform = "scaleX(1)"
+                    document.getElementById("image_pic").style.backgroundImage = "url('girlhead.png')"
+
+            }
+
+            else if(countcheck ==5){
+                    document.getElementById("image_pic").style.transform = ""
+                    document.getElementById("common_text").innerHTML = "Thank you<br>madam"
+                    document.getElementById("image_pic").style.visibility = "visible"
+                    document.getElementById("image_pic").style.transform = "scaleX(1)"
+                    document.getElementById("image_pic").style.backgroundImage = "url('head.png')"
+
+            }
+            
+            else if (countcheck == 6){
+                    document.getElementById("image_text").style.visibility = "hidden"
+                    document.getElementById("common_text").style.visibility = "hidden"
+                    document.getElementById("image_pic").style.visibility = "hidden"
+                    stuck = false
+                    againt= false
+                    endchat6 = false
+                    
+
+                  
+                }
+        }
+    }
+    else{
+    }
+
+
+
+
+
+
     noStroke()
     fill(color(0,0,0,0.2))
         
