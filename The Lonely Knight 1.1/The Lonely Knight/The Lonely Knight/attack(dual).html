@@ -326,6 +326,10 @@
             if(enemyhealth2<0){
                 enemyhealth = 0
             }
+            if (stamina<=5){
+
+                stamina=0
+            }
             //When the player kills the enemy
             if ((enemyhealth <= 0)&&(enemyhealth2 <=0)) {
 
@@ -366,7 +370,7 @@
                 }
             }
             ///When the player dies
-            else if ((health<=0)&&(once7 == 1)){
+            else if ((health<=0)&&(once7 == 1)||(stamina==0)){
                 document.getElementById("shadow").style.visibility = "visible"
                 document.getElementById("shadow").style.backgroundColor = "red"
                 document.getElementById("win_window").style.visibility = "visible"
@@ -383,7 +387,11 @@
                 time = hour + ":" + minutes + " " + month + "/" + (day-1) + "/" + year;
                 document.getElementById("xpr").innerHTML = "Died On " + time
                 document.getElementById("goldr").style.visibility = "visible"
-                if (goblin===true){
+                if(stamina==0){
+                    fromdeath="Died from no stamina"
+                }
+                
+                else if (goblin===true){
                     fromdeath = "Died From a Goblin Attack"
                 }
                 else if(mushroom ===true){
